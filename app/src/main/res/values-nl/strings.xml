@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SnookerScoreBoard</string>
+    <string name="main_menu">Hoofdmenu</string>
+    <string name="new_game">Nieuw spel</string>
+    <string name="welcome_message">Welkom bij SnookerScoreBoard</string>
+</resources>

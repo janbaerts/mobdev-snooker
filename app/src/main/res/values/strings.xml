@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SnookerScoreBoard</string>
+    <string name="welcome_message">Welcome to SnookerScoreBoard</string>
+    <string name="main_menu">Main menu</string>
+    <string name="new_game">New game</string>
+
 </resources>
