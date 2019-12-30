@@ -3,27 +3,30 @@ package com.janbaerts.android.snookerscoreboard;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.janbaerts.android.snookerscoreboard.data.FireStoreDB;
 import com.janbaerts.android.snookerscoreboard.models.Player;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String TAG = "MainActivity";
+
+
     private TextView playerList;
+    private TextView testingTextView;
     private final FirebaseFirestore database;
     private Player lei;
     private Player jan;
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        playerList = findViewById(R.id.tv_player_list);
+        testingTextView = findViewById(R.id.testingTextView);
 
 //        lei = new Player("Lei", "Wang", "lw@hotmail.com");
 //        jan = new Player("Jan", "Baerts", "janbaerts@hotmail.com");
@@ -47,8 +50,17 @@ public class MainActivity extends AppCompatActivity {
 //        deleteAllPlayers();
 //        addPlayers();
 //        fillPlayerList();
+//        getPlayerList();
     }
 
+    public void startNewGame(View view) {
+        Intent intent = new Intent(this, StartNewGameActivity.class);
+        startActivity(intent);
+    }
+
+
+
+    // FireStore experiments...
     private void addPlayers() {
         database.collection("players").document(lei.getEmail()).set(lei);
         database.collection("players").document(jan.getEmail()).set(jan);
@@ -72,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
                         players.add(task.getResult().toObject(Player.class));
                     }
                 });
-        playerList.setText(players.get(0).toString());
+        if (players.size() > 0)
+            testingTextView.setText(players.get(0).toString());
+    }
+
+    private void getPlayerList() {
+        TreeSet<Player> testingTreeSet = new TreeSet<>();
+//        FireStoreDB.searchForPlayer(testingTreeSet, "Baerts");
     }
 }

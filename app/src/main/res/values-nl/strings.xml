@@ -4,4 +4,14 @@
     <string name="main_menu">Hoofdmenu</string>
     <string name="new_game">Nieuw spel</string>
     <string name="welcome_message">Welkom bij SnookerScoreBoard</string>
+    <string name="title_activity_start_new_game">Start een wedstrijd</string>
+    <string name="player_1">Speler 1</string>
+    <string name="player_2">Speler 2</string>
+    <string name="select_player">Kies een speler</string>
+    <string name="max_number_of_frames">Maximum aantal frames</string>
+    <string name="none_selected">Nog niet gekozen</string>
+    <string name="tap_to_select">Tik om te kiezen</string>
+    <string name="tap_to_edit">Tik om te bewerken</string>
+    <string name="search">Zoek</string>
+    <string name="enter_search_string">Typ een zoekwoord...</string>
 </resources>

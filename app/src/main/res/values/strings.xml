@@ -3,5 +3,19 @@
     <string name="welcome_message">Welcome to SnookerScoreBoard</string>
     <string name="main_menu">Main menu</string>
     <string name="new_game">New game</string>
+    <string name="title_activity_start_new_game">Start a new game</string>
+
+    <!--    activity-start-new-game-->
+    <string name="player_1">Player 1</string>
+    <string name="player_2">Player 2</string>
+    <string name="select_player">Select player</string>
+    <string name="max_number_of_frames">Maximum number of frames</string>
+    <string name="none_selected">None selected</string>
+    <string name="tap_to_select">Tap to select</string>
+
+<!--    search-player-fragment-->
+    <string name="search">Search</string>
+    <string name="tap_to_edit">Tap to edit</string>
+    <string name="enter_search_string">Enter a keyword...</string>
 
 </resources>
