@@ -43,14 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
         testingTextView = findViewById(R.id.testingTextView);
 
-//        lei = new Player("Lei", "Wang", "lw@hotmail.com");
-//        jan = new Player("Jan", "Baerts", "janbaerts@hotmail.com");
-//        ethan = new Player("Ethan", "Baerts", "eb@hotmail.com");
-
-//        deleteAllPlayers();
-//        addPlayers();
-//        fillPlayerList();
-//        getPlayerList();
+        // TODO: Add add new player option.
+        // TODO: View player statistics option (Master - Detail fragments requirement assignment).
     }
 
     public void startNewGame(View view) {
