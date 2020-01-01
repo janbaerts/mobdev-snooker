@@ -36,12 +36,14 @@ public class StartNewGameActivity
     private boolean isShowingSelectingFragment = false;
     private int playerIndex;
     private int fragmentId;
+    private int maximumNumberOfFrames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_new_game);
         playerIndex = -1;
+        maximumNumberOfFrames = 1;
         playerTextViews[0] = (TextView) findViewById(R.id.firstPlayerTextView);
         playerTextViews[1] = (TextView) findViewById(R.id.secondPlayerTextView);
         numberPicker = (NumberPicker) findViewById(R.id.maxFrameNumberPicker);
@@ -114,6 +116,25 @@ public class StartNewGameActivity
     }
 
     private void setUpNumberPicker() {
-        numberPicker.setDisplayedValues(new String[] {"1", "3", "5", "7", "9", "11"});
+        final String[] numberPickerValues = getMaxFrameValues();
+        numberPicker.setDisplayedValues(numberPickerValues);
+        numberPicker.setMinValue(0);
+        numberPicker.setMaxValue(numberPickerValues.length - 1);
+        numberPicker.setValue(1);
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                maximumNumberOfFrames = Integer.parseInt(numberPickerValues[newVal]);
+                System.out.println("In onValueChanged, is now " + maximumNumberOfFrames + ".");
+            }
+        });
+    }
+
+    private String[] getMaxFrameValues() {
+        String[] values = new String[18];
+        int counter = 0;
+        for (int i = 1; i < 36; i += 2)
+            values[counter++] = Integer.toString(i);
+        return values;
     }
 }
