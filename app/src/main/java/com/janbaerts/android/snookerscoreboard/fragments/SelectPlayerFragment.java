@@ -25,6 +25,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.janbaerts.android.snookerscoreboard.R;
+import com.janbaerts.android.snookerscoreboard.StartNewGameActivity;
 import com.janbaerts.android.snookerscoreboard.data.FireStoreDB;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 import com.janbaerts.android.snookerscoreboard.recyclerviews.SearchPlayerRecyclerViewAdapter;
@@ -82,19 +83,30 @@ public class SelectPlayerFragment extends Fragment {
         adapter = new SearchPlayerRecyclerViewAdapter(playerList);
         recyclerView.setAdapter(adapter);
         searchPlayerEditText = (EditText) view.findViewById(R.id.searchPlayerEditText);
+        // TODO: Add player clear button.
         searchButton = (Button) view.findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (searchPlayerEditText.getText().length() != 0)
+                    searchPlayersWithSearchString();
+                else
+                    ((StartNewGameActivity)getActivity()).hideSelectPlayerFragment();
+            }
+        });
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    // Rename method, update argument and hook method into UI event
+    public void searchButtonPressed(String searchString) {
         if (interactionListener != null) {
-            interactionListener.onFragmentInteraction(uri);
+            interactionListener.onFragmentInteraction(searchString);
         }
     }
 
@@ -126,11 +138,11 @@ public class SelectPlayerFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(String searchString);
     }
 
-    public void searchPlayersWithSearchString(View view) {
+    public void searchPlayersWithSearchString() {
+        // TODO: Enable case insensitive queries.
         String[] searchStrings = searchPlayerEditText.getText().toString().split(" ");
         queryFirebase(searchStrings);
     }

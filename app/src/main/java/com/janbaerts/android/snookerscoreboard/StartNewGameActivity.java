@@ -14,6 +14,7 @@ import android.text.Layout;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.janbaerts.android.snookerscoreboard.fragments.SelectPlayerFragment;
@@ -30,6 +31,8 @@ public class StartNewGameActivity
 
     private Player[] players = new Player[2];
     private TextView[] playerTextViews = new TextView[2];
+    private NumberPicker numberPicker;
+
     private boolean isShowingSelectingFragment = false;
     private int playerIndex;
     private int fragmentId;
@@ -41,6 +44,8 @@ public class StartNewGameActivity
         playerIndex = -1;
         playerTextViews[0] = (TextView) findViewById(R.id.firstPlayerTextView);
         playerTextViews[1] = (TextView) findViewById(R.id.secondPlayerTextView);
+        numberPicker = (NumberPicker) findViewById(R.id.maxFrameNumberPicker);
+        setUpNumberPicker();
     }
 
     public void selectPlayer(View view) {
@@ -65,7 +70,7 @@ public class StartNewGameActivity
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(String searchString) {
 
     }
 
@@ -106,5 +111,9 @@ public class StartNewGameActivity
         int idIndex = splitTextViewContent.length - 1;
         int idLength = splitTextViewContent[idIndex].length();
         return splitTextViewContent[idIndex].substring(1, idLength - 1);
+    }
+
+    private void setUpNumberPicker() {
+        numberPicker.setDisplayedValues(new String[] {"1", "3", "5", "7", "9", "11"});
     }
 }

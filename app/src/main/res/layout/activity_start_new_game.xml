@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="8dp"
+            android:animateLayoutChanges="true"
             >
 
             <TextView
@@ -87,6 +88,28 @@
             android:id="@+id/selectSecondPlayerFrameLayout"
             />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/max_number_of_frames"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
+
+            <NumberPicker
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme"
+                android:id="@+id/maxFrameNumberPicker"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

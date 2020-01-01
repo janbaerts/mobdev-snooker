@@ -1,6 +1,6 @@
 package com.janbaerts.android.snookerscoreboard.models;
 
-public enum EventType {
+public enum GameEvent {
     END_OF_TURN,
     POT,
     FOUL,
