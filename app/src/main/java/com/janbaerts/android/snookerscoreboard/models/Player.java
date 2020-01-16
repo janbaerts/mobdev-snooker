@@ -3,9 +3,13 @@ package com.janbaerts.android.snookerscoreboard.models;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@IgnoreExtraProperties
 public class Player implements Comparable<Player> {
 
     // TODO: Add break list.
@@ -22,6 +26,7 @@ public class Player implements Comparable<Player> {
     }
 
     public Player(String firstname, String lastname, String email) {
+        this();
         setFirstname(firstname);
         setLastname(lastname);
         setEmail(email);
@@ -73,6 +78,7 @@ public class Player implements Comparable<Player> {
         this.breakList.add(newBreak);
     }
 
+    @Exclude
     public Break getHighestBreak() {
         if (breakList.size() == 0)
             return null;
@@ -91,10 +97,12 @@ public class Player implements Comparable<Player> {
         return String.format("%s %s (%s)", getFirstname(), getLastname(), getEmail());
     }
 
+    @Exclude
     public String getFullName() {
         return String.format("%s %s", getFirstname(), getLastname());
     }
 
+    @Exclude
     public String getAbbreviatedName() {
         return String.format("%s. %s", getFirstname().charAt(0), getLastname());
     }

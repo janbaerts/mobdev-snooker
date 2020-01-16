@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1092303247445",
+    "firebase_url": "https://janbaerts-snookerscoreboard.firebaseio.com",
+    "project_id": "janbaerts-snookerscoreboard",
+    "storage_bucket": "janbaerts-snookerscoreboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092303247445:android:8b333dd6315590d9ad9cdc",
+        "android_client_info": {
+          "package_name": "com.janbaerts.android.snookerscoreboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092303247445-5ot5n5upfj49e8olqbk2bj3molagi8uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhcxLl5XhQwRRfP0k-oBYKyJfln-GUTbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092303247445-5ot5n5upfj49e8olqbk2bj3molagi8uk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

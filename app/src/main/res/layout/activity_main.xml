@@ -37,6 +37,23 @@
             android:onClick="startNewGame"
             />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/create_new_player"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:onClick=""
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/player_statistics"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:onClick="playerStatistics"
+            />
+
         <TextView
             android:id="@+id/testingTextView"
             android:layout_width="match_parent"

@@ -104,9 +104,9 @@ public class SelectPlayerFragment extends Fragment {
     }
 
     // Rename method, update argument and hook method into UI event
-    public void searchButtonPressed(String searchString) {
+    public void searchButtonPressed(View view) {
         if (interactionListener != null) {
-            interactionListener.onFragmentInteraction(searchString);
+            interactionListener.tappedOnPlayer(view);
         }
     }
 
@@ -138,7 +138,7 @@ public class SelectPlayerFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String searchString);
+        void tappedOnPlayer(View view);
     }
 
     public void searchPlayersWithSearchString() {
@@ -168,6 +168,7 @@ public class SelectPlayerFragment extends Fragment {
                                 System.out.println("Playerlist size = " + playerList.size());
                                 adapter = new SearchPlayerRecyclerViewAdapter(playerList);
                                 recyclerView.setAdapter(adapter);
+                                System.out.println(recyclerView.getAdapter().getItemCount());
                             }
                         });
             }

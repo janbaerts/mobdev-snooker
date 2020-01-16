@@ -4,6 +4,7 @@
     <string name="main_menu">Main menu</string>
     <string name="new_game">New game</string>
     <string name="title_activity_start_new_game">Start a new game</string>
+    <string name="create_new_player">Create a new player</string>
 
     <!--    activity-start-new-game-->
     <string name="player_1">Player 1</string>
@@ -13,9 +14,12 @@
     <string name="none_selected">None selected</string>
     <string name="tap_to_select">Tap to select</string>
 
-<!--    search-player-fragment-->
+    <!--    search-player-fragment-->
     <string name="search">Search</string>
     <string name="tap_to_edit">Tap to edit</string>
     <string name="enter_search_string">Enter a keyword...</string>
+
+    <!--    activity-playerstatistics-->
+    <string name="player_statistics">Player statistics</string>
 
 </resources>

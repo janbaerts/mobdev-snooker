@@ -36,7 +36,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="200dp"
             android:layout_margin="16dp"
             android:visibility="visible"
             android:id="@+id/playerListRecyclerView"

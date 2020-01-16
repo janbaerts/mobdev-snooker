@@ -1,6 +1,5 @@
 package com.janbaerts.android.snookerscoreboard;
 
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -8,12 +7,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -21,7 +16,6 @@ import com.janbaerts.android.snookerscoreboard.fragments.SelectPlayerFragment;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 import com.janbaerts.android.snookerscoreboard.recyclerviews.SearchPlayerRecyclerViewAdapter;
 
-import org.w3c.dom.Text;
 
 public class StartNewGameActivity
         extends AppCompatActivity
@@ -48,6 +42,7 @@ public class StartNewGameActivity
         playerTextViews[1] = (TextView) findViewById(R.id.secondPlayerTextView);
         numberPicker = (NumberPicker) findViewById(R.id.maxFrameNumberPicker);
         setUpNumberPicker();
+        getSupportActionBar().setTitle(R.string.title_activity_start_new_game);
     }
 
     public void selectPlayer(View view) {
@@ -58,6 +53,11 @@ public class StartNewGameActivity
 
         if (playerIndex >= 0)
             showSelectPlayerFragment();
+    }
+
+    @Override
+    public void tappedOnPlayer(View view) {
+        savePlayer(view);
     }
 
     public void savePlayer(View view) {
@@ -71,10 +71,6 @@ public class StartNewGameActivity
         hideSelectPlayerFragment();
     }
 
-    @Override
-    public void onFragmentInteraction(String searchString) {
-
-    }
 
     public void showSelectPlayerFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
