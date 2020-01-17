@@ -16,4 +16,17 @@
     <string name="enter_search_string">Typ een zoekwoord...</string>
     <string name="player_statistics">Spelerstatistieken</string>
     <string name="create_new_player">Maak een nieuwe speler aan</string>
+    <string name="all_fields_required">Alle velden zijn verplicht.</string>
+    <string name="create_player">Maak aan</string>
+    <string name="email">E-mail adres</string>
+    <string name="firstname">Voornaam</string>
+    <string name="lastname">Achternaam</string>
+    <string name="player_already_exists">Deze speler bestaat al.</string>
+    <string name="email_not_valid">Dat is geen geldig mailadres.</string>
+    <string name="email_required">Mailadres is verplicht.</string>
+    <string name="firstname_required">Voornaam is verplicht.</string>
+    <string name="lastname_required">Achternaam is verplicht.</string>
+    <string name="player_being_created">Speler wordt aangemaakt.</string>
+    <string name="player_created">Speler aangemaakt.</string>
+    <string name="checking_player_id">SpelersID controle.</string>
 </resources>

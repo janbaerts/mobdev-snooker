@@ -43,7 +43,8 @@
             android:text="@string/create_new_player"
             android:padding="8dp"
             android:layout_margin="8dp"
-            android:onClick=""
+            android:onClick="createNewPlayer"
+            />
 
         <Button
             android:layout_width="match_parent"

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
+import android.util.JsonWriter;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -14,9 +16,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.janbaerts.android.snookerscoreboard.data.FireStoreDB;
+import com.janbaerts.android.snookerscoreboard.models.Match;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
@@ -61,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createNewPlayer(View view) {
-
+        Intent intent = new Intent(this, CreateNewPlayerActivity.class);
+        startActivity(intent);
     }
 
     public void playerStatistics(View view) {
@@ -74,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
 //        }
         Intent intent = new Intent(this, PlayerStatisticsActivity.class);
         startActivity(intent);
+    }
+
+    public void testMethod(View view) {
+
     }
 
 

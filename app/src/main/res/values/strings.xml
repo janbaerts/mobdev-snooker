@@ -22,4 +22,19 @@
     <!--    activity-playerstatistics-->
     <string name="player_statistics">Player statistics</string>
 
+    <!--    activity-create-new-player-->
+    <string name="firstname">First name</string>
+    <string name="lastname">Last name</string>
+    <string name="email">E-mail address</string>
+    <string name="all_fields_required">All fields must be filled out.</string>
+    <string name="player_already_exists">This player exists already.</string>
+    <string name="create_player">Create player</string>
+    <string name="firstname_required">First name is required.</string>
+    <string name="lastname_required">Last name is required.</string>
+    <string name="email_not_valid">That\'s not an email address.</string>
+    <string name="email_required">E-mail address is required.</string>
+    <string name="player_being_created">Player is being created.</string>
+    <string name="player_created">Player created.</string>
+    <string name="checking_player_id">Checking player ID.</string>
+
 </resources>
