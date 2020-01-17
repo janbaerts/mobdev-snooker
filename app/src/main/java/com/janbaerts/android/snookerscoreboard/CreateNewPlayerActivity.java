@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -25,8 +28,11 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
     EditText firstnameEditText;
     EditText lastnameEditText;
     EditText emailEditText;
+    EditText passwordEditText;
+    EditText verifyPasswordEditText;
     TextView infoTextView;
     FirebaseFirestore database;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +41,11 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
         firstnameEditText = findViewById(R.id.firstnameEditText);
         lastnameEditText = findViewById(R.id.lastnameEditText);
         emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        verifyPasswordEditText = findViewById(R.id.verifyPasswordEditText);
         infoTextView = findViewById(R.id.infoTextView);
         database = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     public void createPlayerTapped(View view) {
@@ -63,6 +72,9 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
         } else if (!emailEditText.getText().toString().contains("@") || !emailEditText.getText().toString().contains("."))
             sb.append(getResources().getString(R.string.email_not_valid) + "\n");
 
+        if (!passwordEditText.getText().toString().equals(verifyPasswordEditText.getText().toString()))
+            sb.append(getResources().getString(R.string.passwords_do_not_match));
+
         return sb.toString();
     }
 
@@ -87,9 +99,29 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
     private void savePlayerToDatabase(Player player) {
         infoTextView.setText(getResources().getString(R.string.player_being_created));
         database.collection("players").document(emailEditText.getText().toString())
-                .set(player);
-        infoTextView.setTextColor(Color.GREEN);
-        infoTextView.setText(getResources().getString(R.string.player_created));
+                .set(player)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        infoTextView.setTextColor(Color.GREEN);
+                        infoTextView.setText(getResources().getString(R.string.player_created));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CreateNewPlayerActivity.this, getResources().getString(R.string.player_creation_failure),
+                                Toast.LENGTH_SHORT);
+                    }
+                });
+        firebaseAuth.createUserWithEmailAndPassword(player.getEmail(), passwordEditText.getText().toString())
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        infoTextView.setTextColor(Color.BLUE);
+                        infoTextView.setText(getResources().getString(R.string.player_signed_in));
+                    }
+                });
     }
 
 }

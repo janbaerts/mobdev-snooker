@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">SnookerScoreBoard</string>
     <string name="welcome_message">Welcome to SnookerScoreBoard</string>
+    <string name="welcome">Welcome</string>
     <string name="main_menu">Main menu</string>
-    <string name="new_game">New game</string>
-    <string name="title_activity_start_new_game">Start a new game</string>
+    <string name="new_match">New match</string>
+    <string name="title_activity_start_new_match">Start a new match</string>
     <string name="create_new_player">Create a new player</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
 
     <!--    activity-start-new-game-->
     <string name="player_1">Player 1</string>
@@ -36,5 +39,12 @@
     <string name="player_being_created">Player is being created.</string>
     <string name="player_created">Player created.</string>
     <string name="checking_player_id">Checking player ID.</string>
+    <string name="password">Password</string>
+    <string name="verify_password">Verify password</string>
+    <string name="password_too_short">Password must have at least 6 characters.</string>
+    <string name="password_must_contain_letters_and_numbers">Password must include letters and numbers.</string>
+    <string name="passwords_do_not_match">Password verification failed.</string>
+    <string name="player_creation_failure">Sorry, player creation failed. Please check your internet connection.</string>
+    <string name="player_signed_in">You have succesfully signed in.</string>
 
 </resources>

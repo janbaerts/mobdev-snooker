@@ -42,7 +42,7 @@ public class StartNewGameActivity
         playerTextViews[1] = (TextView) findViewById(R.id.secondPlayerTextView);
         numberPicker = (NumberPicker) findViewById(R.id.maxFrameNumberPicker);
         setUpNumberPicker();
-        getSupportActionBar().setTitle(R.string.title_activity_start_new_game);
+        getSupportActionBar().setTitle(R.string.title_activity_start_new_match);
     }
 
     public void selectPlayer(View view) {

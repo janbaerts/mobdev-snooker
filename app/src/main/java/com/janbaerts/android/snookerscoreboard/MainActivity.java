@@ -5,25 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.storage.StorageManager;
-import android.util.JsonWriter;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import com.janbaerts.android.snookerscoreboard.data.FireStoreDB;
-import com.janbaerts.android.snookerscoreboard.models.Match;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
@@ -34,29 +29,64 @@ public class MainActivity extends AppCompatActivity {
 
 
     private TextView playerList;
-    private TextView testingTextView;
-    private final FirebaseFirestore database;
     private Player lei;
     private Player jan;
     private Player ethan;
     private Player homer;
 
+    TextView welcomeTextView;
+
+    Button newMatchButton;
+    Button signUpButton;
+    Button playerStatisticsButton;
+
     private List<Player> players;
 
-    public MainActivity() {
-        this.database = FirebaseFirestore.getInstance();
-    }
+    private FirebaseFirestore database;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+    private Player player;
+
+    public MainActivity() { }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        testingTextView = findViewById(R.id.testingTextView);
+        welcomeTextView = findViewById(R.id.welcomeTextView);
+
+        newMatchButton = findViewById(R.id.newMatchButton);
+        signUpButton = findViewById(R.id.signUpButton);
+        playerStatisticsButton = findViewById(R.id.playerStatisticsButton);
+
+        database = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+
+        if (user != null) {
+            database.collection("players").whereEqualTo("email", user.getEmail())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            player = queryDocumentSnapshots.toObjects(Player.class).get(0);
+                            welcomeTextView.setText(getResources().getString(R.string.welcome) + ", " + player.getFirstname());
+                        }
+                    });
+        }
+
+        System.out.println(firebaseAuth.getCurrentUser().toString());
 
         // TODO: Add add new player option.
         // TODO: View player statistics option (Master - Detail fragments requirement assignment).
         // TODO: Transition Portrait-Landscape.
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("Current FirebaseUser = " + firebaseAuth.getCurrentUser().getEmail());
     }
 
     public void startNewGame(View view) {
@@ -84,9 +114,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void signUpUser(View view) {
+        Intent intent = new Intent(this, CreateNewPlayerActivity.class);
+        startActivity(intent);
+    }
+
     public void testMethod(View view) {
 
     }
+
 
 
 
@@ -122,8 +158,6 @@ public class MainActivity extends AppCompatActivity {
                         players.add(task.getResult().toObject(Player.class));
                     }
                 });
-        if (players.size() > 0)
-            testingTextView.setText(players.get(0).toString());
     }
 
     private void getPlayerList() {

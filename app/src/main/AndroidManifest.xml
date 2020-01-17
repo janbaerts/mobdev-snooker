@@ -11,12 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateNewPlayerActivity"
+        <activity android:name=".FirebaseLoginActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".CreateNewPlayerActivity"
             android:label="@string/create_new_player"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".PlayerStatisticsActivity"
@@ -28,7 +31,7 @@
         </activity>
         <activity
             android:name=".StartNewGameActivity"
-            android:label="@string/title_activity_start_new_game"
+            android:label="@string/title_activity_start_new_match"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">
             <meta-data

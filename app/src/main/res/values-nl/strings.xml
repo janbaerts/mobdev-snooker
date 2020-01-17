@@ -2,9 +2,7 @@
 <resources>
     <string name="app_name">SnookerScoreBoard</string>
     <string name="main_menu">Hoofdmenu</string>
-    <string name="new_game">Nieuw spel</string>
     <string name="welcome_message">Welkom bij SnookerScoreBoard</string>
-    <string name="title_activity_start_new_game">Start een wedstrijd</string>
     <string name="player_1">Speler 1</string>
     <string name="player_2">Speler 2</string>
     <string name="select_player">Kies een speler</string>
@@ -29,4 +27,16 @@
     <string name="player_being_created">Speler wordt aangemaakt.</string>
     <string name="player_created">Speler aangemaakt.</string>
     <string name="checking_player_id">SpelersID controle.</string>
+    <string name="password">Wachtwoord</string>
+    <string name="verify_password">Herhaal wachtwoord</string>
+    <string name="password_must_contain_letters_and_numbers">Wachtwoord moet letters en cijfers bevatten.</string>
+    <string name="password_too_short">Wachtwoord moet ten minste 6 karakters lang zijn.</string>
+    <string name="passwords_do_not_match">Wachtwoorden komen niet overeen.</string>
+    <string name="player_creation_failure">Sorry, het aanmaken van de speler is niet gelukt. Controleer of uw internetverbinding werkt.</string>
+    <string name="player_signed_in">U bent aangemeld.</string>
+    <string name="sign_up">Aanmelden</string>
+    <string name="title_activity_start_new_match">Start nieuwe wedstrijd</string>
+    <string name="log_in">Inloggen</string>
+    <string name="new_match">Nieuwe wedstrijd</string>
+    <string name="welcome">Welkom</string>
 </resources>
