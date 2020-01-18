@@ -72,7 +72,9 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
         } else if (!emailEditText.getText().toString().contains("@") || !emailEditText.getText().toString().contains("."))
             sb.append(getResources().getString(R.string.email_not_valid) + "\n");
 
-        if (!passwordEditText.getText().toString().equals(verifyPasswordEditText.getText().toString()))
+        if (passwordEditText.getText().toString().length() < 6)
+            sb.append(getResources().getString(R.string.password_too_short));
+        else if (!passwordEditText.getText().toString().equals(verifyPasswordEditText.getText().toString()))
             sb.append(getResources().getString(R.string.passwords_do_not_match));
 
         return sb.toString();
@@ -111,7 +113,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(CreateNewPlayerActivity.this, getResources().getString(R.string.player_creation_failure),
-                                Toast.LENGTH_SHORT);
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
         firebaseAuth.createUserWithEmailAndPassword(player.getEmail(), passwordEditText.getText().toString())
@@ -120,6 +122,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
                     public void onSuccess(AuthResult authResult) {
                         infoTextView.setTextColor(Color.BLUE);
                         infoTextView.setText(getResources().getString(R.string.player_signed_in));
+                        finish();
                     }
                 });
     }

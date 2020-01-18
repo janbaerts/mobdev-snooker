@@ -39,4 +39,5 @@
     <string name="log_in">Inloggen</string>
     <string name="new_match">Nieuwe wedstrijd</string>
     <string name="welcome">Welkom</string>
+    <string name="log_out">Afmelden</string>
 </resources>
