@@ -1,6 +1,6 @@
 package com.janbaerts.android.snookerscoreboard.data;
 
-public enum PictureStyle {
+public enum FavouriteBall {
     CUEBALL(0, "cueball"),
     REDBALL(1, "redball"),
     YELLOWBALL(2, "yellowball"),
@@ -14,7 +14,7 @@ public enum PictureStyle {
     private int value;
     private String name;
 
-    PictureStyle(int value, String name) {
+    FavouriteBall(int value, String name) {
         this.value = value;
         this.name = name;
     }

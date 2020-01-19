@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
+import com.janbaerts.android.snookerscoreboard.data.FavouriteBall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +18,23 @@ public class Player implements Comparable<Player> {
     private String firstname;
     private String lastname;
     private String email;
+    private FavouriteBall favouriteBall;
     private List<Break> breakList;
     private List<Break> highBreakHistory;
 
     public Player() {
         breakList = new ArrayList<>();
         highBreakHistory = new ArrayList<>();
+        favouriteBall = FavouriteBall.REDBALL;
     }
 
-    public Player(String firstname, String lastname, String email) {
+    // TODO: Adjust constructor for extra properties.
+    public Player(String firstname, String lastname, String email, int favouriteBall) {
         this();
         setFirstname(firstname);
         setLastname(lastname);
         setEmail(email);
+        setFavouriteBall(FavouriteBall.values()[favouriteBall]);
     }
 
     // Getters and Setters
@@ -55,6 +60,14 @@ public class Player implements Comparable<Player> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public FavouriteBall getFavouriteBall() {
+        return favouriteBall;
+    }
+
+    public void setFavouriteBall(FavouriteBall favouriteBall) {
+        this.favouriteBall = favouriteBall;
     }
 
     public List<Break> getBreakList() {

@@ -3,52 +3,56 @@ package com.janbaerts.android.snookerscoreboard.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.janbaerts.android.snookerscoreboard.R;
+import com.janbaerts.android.snookerscoreboard.data.FavouriteBall;
 
 public class SelectPictureDialogFragment extends DialogFragment {
 
+    SelectedPictureListener selectedPictureListener;
+    FavouriteBall selectedPicture;
 
     public SelectPictureDialogFragment() {
         // Required empty public constructor
     }
 
+    public interface SelectedPictureListener {
+        public void onPictureTapped(int selectedColor);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            selectedPictureListener = (SelectedPictureListener) context;
+        } catch (ClassCastException cce) {
+            throw new ClassCastException("Context doesn't implement SelectedPictureListener.");
+        }
+
+    }
+
+    // TODO: Nice to have: customized list using ListAdapter.
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("test")
-                .setPositiveButton("Positive", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Log.i("JAN", "Clicked positive button.");
-                    }
-                })
-                .setNegativeButton("Negative", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Log.i("JAN", "Clicked negative button.");
-                    }
-                });
-        // Create the AlertDialog object and return it
+        builder.setTitle("Choose color...")
+            .setItems(R.array.ball_colors, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogInterface, int color) {
+                    Log.d("JAN", "In onClick van onCreateDialog().");
+                    Log.d("JAN", "You clicked item number " + color + ".");
+                    selectedPicture = FavouriteBall.values()[color];
+                }
+            });
+
         return builder.create();
     }
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_select_picture_dialog, container, false);
-//
-//
-//    }
 
 }

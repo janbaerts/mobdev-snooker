@@ -2,9 +2,12 @@ package com.janbaerts.android.snookerscoreboard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,11 +22,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.janbaerts.android.snookerscoreboard.data.FavouriteBall;
+import com.janbaerts.android.snookerscoreboard.fragments.SelectPictureDialogFragment;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 
 import java.util.concurrent.CancellationException;
 
-public class CreateNewPlayerActivity extends AppCompatActivity {
+public class CreateNewPlayerActivity extends AppCompatActivity
+        implements SelectPictureDialogFragment.SelectedPictureListener {
 
     EditText firstnameEditText;
     EditText lastnameEditText;
@@ -31,6 +37,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
     EditText passwordEditText;
     EditText verifyPasswordEditText;
     TextView infoTextView;
+    int favouriteBall = 1;
     FirebaseFirestore database;
     FirebaseAuth firebaseAuth;
 
@@ -46,6 +53,13 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
         infoTextView = findViewById(R.id.infoTextView);
         database = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    public void imageTapped(View view) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        SelectPictureDialogFragment dialogFragment = new SelectPictureDialogFragment();
+        dialogFragment.show(transaction, null);
     }
 
     public void createPlayerTapped(View view) {
@@ -92,7 +106,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
                     } else {
                         Player player = new Player(firstnameEditText.getText().toString(),
                                 lastnameEditText.getText().toString(),
-                                emailEditText.getText().toString());
+                                emailEditText.getText().toString(), favouriteBall);
                         savePlayerToDatabase(player);
                     }
                 });
@@ -125,6 +139,11 @@ public class CreateNewPlayerActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+    }
+
+    public void onPictureTapped(int selectedColor) {
+        Log.i("JAN", "Favourite ball = " + FavouriteBall.values()[selectedColor].toString());
+        this.favouriteBall = selectedColor;
     }
 
 }

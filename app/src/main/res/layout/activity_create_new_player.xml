@@ -29,6 +29,7 @@
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/player_image"
+                android:onClick="imageTapped"
                 app:layout_constraintEnd_toStartOf="@+id/firstnameEditText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

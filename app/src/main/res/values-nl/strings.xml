@@ -42,4 +42,5 @@
     <string name="log_out">Afmelden</string>
     <string name="explain_image">Tik op de afbeelding om er eentje te kiezen.</string>
     <string name="player_image">Spelersafbeelding</string>
+    <string name="choose_color">Kies een kleur</string>
 </resources>
