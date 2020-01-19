@@ -17,13 +17,15 @@
     <string name="max_number_of_frames">Maximum number of frames</string>
     <string name="none_selected">None selected</string>
     <string name="tap_to_select">Tap to select</string>
+    <string name="explain_image">Tap image to choose one.</string>
+    <string name="player_image">Player picture</string>
 
     <!--    search-player-fragment-->
     <string name="search">Search</string>
     <string name="tap_to_edit">Tap to edit</string>
     <string name="enter_search_string">Enter a keyword...</string>
 
-    <!--    activity-playerstatistics-->
+    <!--    activity-player-statistics-->
     <string name="player_statistics">Player statistics</string>
 
     <!--    activity-create-new-player-->

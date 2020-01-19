@@ -40,4 +40,6 @@
     <string name="new_match">Nieuwe wedstrijd</string>
     <string name="welcome">Welkom</string>
     <string name="log_out">Afmelden</string>
+    <string name="explain_image">Tik op de afbeelding om er eentje te kiezen.</string>
+    <string name="player_image">Spelersafbeelding</string>
 </resources>
