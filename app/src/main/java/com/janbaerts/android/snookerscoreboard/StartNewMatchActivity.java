@@ -17,11 +17,11 @@ import com.janbaerts.android.snookerscoreboard.models.Player;
 import com.janbaerts.android.snookerscoreboard.recyclerviews.SearchPlayerRecyclerViewAdapter;
 
 
-public class StartNewGameActivity
+public class StartNewMatchActivity
         extends AppCompatActivity
         implements SelectPlayerFragment.OnFragmentInteractionListener {
 
-    public static final String TAG = "StartNewGameActivity";
+    public static final String TAG = "StartNewMatchActivity";
 
     private Player[] players = new Player[2];
     private TextView[] playerTextViews = new TextView[2];
@@ -35,7 +35,7 @@ public class StartNewGameActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_new_game);
+        setContentView(R.layout.activity_start_new_match);
         playerIndex = -1;
         maximumNumberOfFrames = 1;
         playerTextViews[0] = (TextView) findViewById(R.id.firstPlayerTextView);

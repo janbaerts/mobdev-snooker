@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,20 +16,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.janbaerts.android.snookerscoreboard.data.FavouriteBall;
 import com.janbaerts.android.snookerscoreboard.fragments.SelectPictureDialogFragment;
 import com.janbaerts.android.snookerscoreboard.models.Player;
-
-import java.util.concurrent.CancellationException;
+import com.janbaerts.android.snookerscoreboard.viewmodels.CreateNewPlayerViewModel;
 
 public class CreateNewPlayerActivity extends AppCompatActivity
         implements SelectPictureDialogFragment.SelectedPictureListener {
@@ -38,11 +34,13 @@ public class CreateNewPlayerActivity extends AppCompatActivity
     EditText emailEditText;
     EditText passwordEditText;
     EditText verifyPasswordEditText;
+    EditText[] allEditTexts;
     TextView infoTextView;
     ProgressBar progressBar;
     FavouriteBall favouriteBall = FavouriteBall.REDBALL;
     ImageView favouriteBallImageView;
 
+    CreateNewPlayerViewModel viewModel;
     FirebaseFirestore database;
     FirebaseAuth firebaseAuth;
 
@@ -50,16 +48,58 @@ public class CreateNewPlayerActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_player);
+        viewModel = ViewModelProviders.of(this).get(CreateNewPlayerViewModel.class);
         firstnameEditText = findViewById(R.id.firstnameEditText);
         lastnameEditText = findViewById(R.id.lastnameEditText);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         verifyPasswordEditText = findViewById(R.id.verifyPasswordEditText);
+        fillAllEditTexts();
         infoTextView = findViewById(R.id.infoTextView);
         progressBar = findViewById(R.id.progressBar);
         favouriteBallImageView = findViewById(R.id.favouriteBallImageView);
         database = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        restoreFields();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveFields();
+    }
+
+    private void fillAllEditTexts() {
+        allEditTexts = new EditText[5];
+        allEditTexts[0] = firstnameEditText;
+        allEditTexts[1] = lastnameEditText;
+        allEditTexts[2] = emailEditText;
+        allEditTexts[3] = passwordEditText;
+        allEditTexts[4] = verifyPasswordEditText;
+    }
+
+    private void restoreFields() {
+        for (int i = 0; i < allEditTexts.length; i++) {
+            if (viewModel.getFields() != null)
+                allEditTexts[i].setText(viewModel.getFields()[i]);
+        }
+        if (viewModel.getFavouriteBall().getResource() != 0) {
+            favouriteBallImageView.setImageDrawable(getResources().getDrawable(viewModel.getFavouriteBall().getResource(), null));
+            favouriteBall = viewModel.getFavouriteBall();
+        }
+
+    }
+
+    private void saveFields() {
+        for (int i = 0; i < allEditTexts.length; i++) {
+            viewModel.setField(i, allEditTexts[i].getText().toString());
+        }
+        viewModel.setFavouriteBall(favouriteBall);
     }
 
     public void imageTapped(View view) {

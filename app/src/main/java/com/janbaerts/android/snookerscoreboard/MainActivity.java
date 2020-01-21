@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startNewGame(View view) {
-        Intent intent = new Intent(this, StartNewGameActivity.class);
+        Intent intent = new Intent(this, StartNewMatchActivity.class);
         startActivity(intent);
     }
 

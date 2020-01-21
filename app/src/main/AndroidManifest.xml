@@ -34,7 +34,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".StartNewGameActivity"
+            android:name=".StartNewMatchActivity"
             android:label="@string/title_activity_start_new_match"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">

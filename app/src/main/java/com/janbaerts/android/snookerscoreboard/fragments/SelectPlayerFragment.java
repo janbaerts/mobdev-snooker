@@ -1,8 +1,6 @@
 package com.janbaerts.android.snookerscoreboard.fragments;
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,15 +22,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.janbaerts.android.snookerscoreboard.R;
-import com.janbaerts.android.snookerscoreboard.StartNewGameActivity;
+import com.janbaerts.android.snookerscoreboard.StartNewMatchActivity;
 import com.janbaerts.android.snookerscoreboard.data.FavouriteBall;
-import com.janbaerts.android.snookerscoreboard.data.FireStoreDB;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 import com.janbaerts.android.snookerscoreboard.recyclerviews.SearchPlayerRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,7 +87,7 @@ public class SelectPlayerFragment extends Fragment {
                 if (searchPlayerEditText.getText().length() != 0)
                     searchPlayersWithSearchString();
                 else
-                    ((StartNewGameActivity)getActivity()).hideSelectPlayerFragment();
+                    ((StartNewMatchActivity)getActivity()).hideSelectPlayerFragment();
             }
         });
         return view;

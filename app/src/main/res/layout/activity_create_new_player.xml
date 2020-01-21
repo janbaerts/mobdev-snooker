@@ -58,10 +58,10 @@
                 android:textColor="#3C3737"
                 android:textSize="12sp"
                 android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintBottom_toBottomOf="@+id/favouriteBallImageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/firstnameEditText"
-                app:layout_constraintTop_toTopOf="@+id/imageView" />
+                app:layout_constraintTop_toTopOf="@+id/favouriteBallImageView" />
 
             <TextView
                 android:id="@+id/firstnameTextView"
@@ -85,7 +85,7 @@
                 android:inputType="none|textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verifyPasswordEditText"
-                app:layout_constraintTop_toBottomOf="@+id/favouriteBallImageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imageInfoTextView" />
 
             <EditText
                 android:id="@+id/lastnameEditText"
