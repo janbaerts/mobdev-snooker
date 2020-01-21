@@ -29,12 +29,12 @@ public class Player implements Comparable<Player> {
     }
 
     // TODO: Adjust constructor for extra properties.
-    public Player(String firstname, String lastname, String email, int favouriteBall) {
+    public Player(String firstname, String lastname, String email, FavouriteBall favouriteBall) {
         this();
         setFirstname(firstname);
         setLastname(lastname);
         setEmail(email);
-        setFavouriteBall(FavouriteBall.values()[favouriteBall]);
+        setFavouriteBall(favouriteBall);
     }
 
     // Getters and Setters

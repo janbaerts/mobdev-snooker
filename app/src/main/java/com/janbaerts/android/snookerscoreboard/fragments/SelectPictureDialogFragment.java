@@ -48,7 +48,7 @@ public class SelectPictureDialogFragment extends DialogFragment {
                 public void onClick(DialogInterface dialogInterface, int color) {
                     Log.d("JAN", "In onClick van onCreateDialog().");
                     Log.d("JAN", "You clicked item number " + color + ".");
-                    selectedPicture = FavouriteBall.values()[color];
+                    selectedPictureListener.onPictureTapped(color);
                 }
             });
 

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +39,10 @@ public class CreateNewPlayerActivity extends AppCompatActivity
     EditText passwordEditText;
     EditText verifyPasswordEditText;
     TextView infoTextView;
-    int favouriteBall = 1;
+    ProgressBar progressBar;
+    FavouriteBall favouriteBall = FavouriteBall.REDBALL;
+    ImageView favouriteBallImageView;
+
     FirebaseFirestore database;
     FirebaseAuth firebaseAuth;
 
@@ -51,6 +56,8 @@ public class CreateNewPlayerActivity extends AppCompatActivity
         passwordEditText = findViewById(R.id.passwordEditText);
         verifyPasswordEditText = findViewById(R.id.verifyPasswordEditText);
         infoTextView = findViewById(R.id.infoTextView);
+        progressBar = findViewById(R.id.progressBar);
+        favouriteBallImageView = findViewById(R.id.favouriteBallImageView);
         database = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -59,7 +66,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         SelectPictureDialogFragment dialogFragment = new SelectPictureDialogFragment();
-        dialogFragment.show(transaction, null);
+        dialogFragment.show(transaction, "SelectPictureDialogFragment");
     }
 
     public void createPlayerTapped(View view) {
@@ -95,6 +102,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity
     }
 
     private void tryToPersistNewPlayer() {
+        progressBar.setVisibility(View.VISIBLE);
         infoTextView.setText(getResources().getString(R.string.checking_player_id));
         database.collection("players")
                 .whereEqualTo("email", emailEditText.getText().toString())
@@ -121,6 +129,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity
                     public void onSuccess(Void aVoid) {
                         infoTextView.setTextColor(Color.GREEN);
                         infoTextView.setText(getResources().getString(R.string.player_created));
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -128,22 +137,27 @@ public class CreateNewPlayerActivity extends AppCompatActivity
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(CreateNewPlayerActivity.this, getResources().getString(R.string.player_creation_failure),
                                 Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 });
+        progressBar.setVisibility(View.VISIBLE);
         firebaseAuth.createUserWithEmailAndPassword(player.getEmail(), passwordEditText.getText().toString())
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         infoTextView.setTextColor(Color.BLUE);
                         infoTextView.setText(getResources().getString(R.string.player_signed_in));
+                        progressBar.setVisibility(View.INVISIBLE);
                         finish();
                     }
                 });
     }
 
+    @Override
     public void onPictureTapped(int selectedColor) {
         Log.i("JAN", "Favourite ball = " + FavouriteBall.values()[selectedColor].toString());
-        this.favouriteBall = selectedColor;
+        this.favouriteBall = FavouriteBall.values()[selectedColor];
+        favouriteBallImageView.setImageDrawable(getResources().getDrawable(favouriteBall.getResource(), null));
     }
 
 }

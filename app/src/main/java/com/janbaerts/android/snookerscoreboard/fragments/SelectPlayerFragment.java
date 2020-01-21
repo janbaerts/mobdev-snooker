@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.janbaerts.android.snookerscoreboard.R;
 import com.janbaerts.android.snookerscoreboard.StartNewGameActivity;
+import com.janbaerts.android.snookerscoreboard.data.FavouriteBall;
 import com.janbaerts.android.snookerscoreboard.data.FireStoreDB;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 import com.janbaerts.android.snookerscoreboard.recyclerviews.SearchPlayerRecyclerViewAdapter;
@@ -181,7 +182,7 @@ public class SelectPlayerFragment extends Fragment {
         for (int i = 0; i < 20; i++) {
             String lastname = "" + i;
             String email = firstname + lastname + "@ssb.com";
-            Player player = new Player(firstname, lastname, email);
+            Player player = new Player(firstname, lastname, email, FavouriteBall.REDBALL);
             playerList.add(player);
         }
     }

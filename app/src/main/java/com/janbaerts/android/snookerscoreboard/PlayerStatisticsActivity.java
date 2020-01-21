@@ -17,6 +17,7 @@ public class PlayerStatisticsActivity
         setContentView(R.layout.activity_player_statistics);
     }
 
+    // TODO: Show how many times player potted their favourite ball.
     @Override
     public void tappedOnPlayer(View view) {
 

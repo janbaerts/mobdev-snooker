@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     Button signUpButton;
     Button playerStatisticsButton;
     Button loginButton;
+    ProgressBar progressBar;
 
     private List<Player> players;
 
@@ -55,11 +58,11 @@ public class MainActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.signUpButton);
         playerStatisticsButton = findViewById(R.id.playerStatisticsButton);
         loginButton = findViewById(R.id.loginButton);
+        progressBar = findViewById(R.id.progressBar);
 
         database = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
-        // TODO: Add add new player option.
         // TODO: View player statistics option (Master - Detail fragments requirement assignment).
         // TODO: Transition Portrait-Landscape.
     }
@@ -97,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkUserState() {
+        progressBar.setVisibility(View.VISIBLE);
         user = firebaseAuth.getCurrentUser();
 
         if (user != null) {
@@ -107,10 +111,12 @@ public class MainActivity extends AppCompatActivity {
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             player = queryDocumentSnapshots.toObjects(Player.class).get(0);
                             welcomeTextView.setText(getResources().getString(R.string.welcome) + ", " + player.getFirstname());
+                            progressBar.setVisibility(View.INVISIBLE);
                             setUI(true);
                         }
                     });
         } else {
+            progressBar.setVisibility(View.INVISIBLE);
             setUI(false);
         }
     }
