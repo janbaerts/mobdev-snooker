@@ -43,4 +43,6 @@
     <string name="explain_image">Tik op de afbeelding om er eentje te kiezen.</string>
     <string name="player_image">Spelersafbeelding</string>
     <string name="choose_color">Kies een kleur</string>
+    <string name="select_player_1">Kies speler 1</string>
+    <string name="select_player_2">Kies speler 2</string>
 </resources>

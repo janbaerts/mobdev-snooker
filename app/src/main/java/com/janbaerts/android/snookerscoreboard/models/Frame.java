@@ -1,16 +1,25 @@
 package com.janbaerts.android.snookerscoreboard.models;
 
+import com.janbaerts.android.snookerscoreboard.data.GameEventType;
+
 import java.util.List;
 
 public class Frame {
 
     private static final int NUMBER_OF_REDS = 15;
+
     private int[] score;
-    // TODO: remainingBalls should be a stack.
-    private List<Ball> remainingBalls;
+    private int remainingBalls;
+    private int turn;
+
+    private boolean isDownToTheColors;
+
+    private List<GameEventType> events;
+    private List<Break> breaks;
 
     public Frame() {
         score = new int[0];
+        remainingBalls = 6 + NUMBER_OF_REDS;
         // TODO: Initialize remainingBalls.
     }
 

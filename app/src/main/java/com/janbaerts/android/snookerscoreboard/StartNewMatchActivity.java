@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.janbaerts.android.snookerscoreboard.fragments.SelectPlayerFragment;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 import com.janbaerts.android.snookerscoreboard.recyclerviews.SearchPlayerRecyclerViewAdapter;
 
+// TODO: Beautify player select fragment!
 
 public class StartNewMatchActivity
         extends AppCompatActivity
@@ -35,7 +37,12 @@ public class StartNewMatchActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_new_match);
+
+//        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+            setContentView(R.layout.activity_start_new_match);
+//        else
+//            setContentView(R.layout.activity_start_new_match_landscape);
+
         playerIndex = -1;
         maximumNumberOfFrames = 1;
         playerTextViews[0] = (TextView) findViewById(R.id.firstPlayerTextView);

@@ -44,6 +44,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity
     FirebaseFirestore database;
     FirebaseAuth firebaseAuth;
 
+    // LifecycleHooks
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +75,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity
         saveFields();
     }
 
+    // ViewModel methods
     private void fillAllEditTexts() {
         allEditTexts = new EditText[5];
         allEditTexts[0] = firstnameEditText;
@@ -102,6 +104,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity
         viewModel.setFavouriteBall(favouriteBall);
     }
 
+    // Eventhandlers
     public void imageTapped(View view) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();

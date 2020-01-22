@@ -19,6 +19,8 @@
     <string name="tap_to_select">Tap to select</string>
     <string name="explain_image">Tap image to choose one.</string>
     <string name="player_image">Player picture</string>
+    <string name="select_player_1">Select player 1</string>
+    <string name="select_player_2">Select player 2</string>
 
     <!--    search-player-fragment-->
     <string name="search">Search</string>
