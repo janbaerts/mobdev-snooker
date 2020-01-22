@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MatchActivity">
+
+    <TextView
+        android:id="@+id/firstPlayerScoreTextView"
+        android:layout_width="135dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="156"
+        android:textAlignment="center"
+        android:textSize="78sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/secondPlayerScoreTextView"
+        android:layout_width="135dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="148"
+        android:textAlignment="center"
+        android:textSize="78sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/firstPlayerNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/player_1"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/firstPlayerScoreTextView"
+        app:layout_constraintStart_toStartOf="@+id/firstPlayerScoreTextView"
+        app:layout_constraintTop_toBottomOf="@+id/firstPlayerScoreTextView" />
+
+    <TextView
+        android:id="@+id/secondPlayerNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/player_2"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/secondPlayerScoreTextView"
+        app:layout_constraintStart_toStartOf="@+id/secondPlayerScoreTextView"
+        app:layout_constraintTop_toBottomOf="@+id/secondPlayerScoreTextView" />
+
+    <TextView
+        android:id="@+id/gameEventHeaderTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/list_of_recent_game_events"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/secondPlayerNameTextView"
+        app:layout_constraintStart_toStartOf="@+id/firstPlayerNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/firstPlayerNameTextView" />
+
+    <TextView
+        android:id="@+id/gameEventListOne"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/secondPlayerNameTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/firstPlayerNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/gameEventHeaderTextView" />
+
+    <TextView
+        android:id="@+id/gameEventListTwo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/secondPlayerNameTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/firstPlayerNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/gameEventListOne" />
+
+    <TextView
+        android:id="@+id/gameEventListThree"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/secondPlayerNameTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/firstPlayerNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/gameEventListTwo" />
+
+    <TextView
+        android:id="@+id/framesScoredTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/player_1"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/secondPlayerScoreTextView"
+        app:layout_constraintEnd_toStartOf="@+id/secondPlayerScoreTextView"
+        app:layout_constraintStart_toEndOf="@+id/firstPlayerScoreTextView"
+        app:layout_constraintTop_toTopOf="@+id/secondPlayerScoreTextView" />
+
+    <Button
+        android:id="@+id/endOfTurnButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/end_of_turn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TableLayout
+        android:id="@+id/snookerballLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:columnCount="3"
+        app:layout_constraintBottom_toTopOf="@+id/endOfTurnButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameEventListThree">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal|fill_vertical"
+            android:backgroundTint="#00FFFFFF"
+            android:cropToPadding="false"
+            android:foregroundGravity="center_vertical"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/yellowball"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="391dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#00FFFFFF"
+            android:cropToPadding="false"
+            android:foregroundGravity="center_vertical"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/greenball"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="391dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#00FFFFFF"
+            android:cropToPadding="false"
+            android:foregroundGravity="center_vertical"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/brownball"
+            tools:layout_editor_absoluteX="284dp"
+            tools:layout_editor_absoluteY="391dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="#00FFFFFF"
+            android:cropToPadding="false"
+            android:foregroundGravity="center_vertical"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/endOfTurnButton"
+            app:layout_constraintStart_toEndOf="@+id/imageButton5"
+            app:srcCompat="@drawable/blueball" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="#00FFFFFF"
+            android:cropToPadding="false"
+            android:foregroundGravity="center_vertical"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toEndOf="@+id/imageButton6"
+            app:srcCompat="@drawable/pinkball"
+            tools:layout_editor_absoluteY="567dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#00FFFFFF"
+            android:cropToPadding="false"
+            android:foregroundGravity="center_vertical"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/endOfTurnButton"
+            app:layout_constraintStart_toStartOf="@+id/endOfTurnButton"
+            app:srcCompat="@drawable/blackball" />
+
+        <ImageButton
+            android:id="@+id/imageButton7"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#00FFFFFF"
+            android:cropToPadding="false"
+            android:foregroundGravity="center_vertical"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/cueball"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="291dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton8"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#00FFFFFF"
+            android:cropToPadding="false"
+            android:foregroundGravity="center_vertical"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/redball"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="291dp" />
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

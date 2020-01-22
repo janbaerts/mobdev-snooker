@@ -2,6 +2,7 @@ package com.janbaerts.android.snookerscoreboard.models;
 
 import com.janbaerts.android.snookerscoreboard.data.GameEventType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Frame {
@@ -14,12 +15,14 @@ public class Frame {
 
     private boolean isDownToTheColors;
 
-    private List<GameEventType> events;
+    private List<GameEvent> events;
     private List<Break> breaks;
 
     public Frame() {
         score = new int[0];
         remainingBalls = 6 + NUMBER_OF_REDS;
+        breaks = new ArrayList<>();
+        events = new ArrayList<>();
         // TODO: Initialize remainingBalls.
     }
 
@@ -35,5 +38,39 @@ public class Frame {
 
     public int getMaximumRemainingPoints(Break currentBreak) {
         return 0;
+    }
+
+    public List<Break> getBreaks() {
+        return this.breaks;
+    }
+
+    public void pushBreak(Break aBreak) {
+        this.breaks.add(aBreak);
+    }
+
+    public Break popBreak() {
+        return this.breaks.remove(this.breaks.size() - 1);
+    }
+
+    public List<GameEvent> getEvents() {
+        return events;
+    }
+
+    public void pushEvent(GameEvent gameEvent) {
+        this.events.add(gameEvent);
+    }
+
+    public GameEvent popEvent() {
+        return this.events.remove(this.events.size() - 1);
+    }
+
+    public GameEvent[] getLastEvents(int numberOfEvents) {
+        if (numberOfEvents > this.events.size())
+            numberOfEvents = this.events.size();
+        int lastIndex = this.events.size() - 1;
+        GameEvent[] result = new GameEvent[numberOfEvents];
+        for (int i = 0; i < numberOfEvents; i++)
+            result[numberOfEvents - 1 - i] = this.events.get(lastIndex - i);
+        return result;
     }
 }

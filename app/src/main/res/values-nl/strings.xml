@@ -45,4 +45,7 @@
     <string name="choose_color">Kies een kleur</string>
     <string name="select_player_1">Kies speler 1</string>
     <string name="select_player_2">Kies speler 2</string>
+    <string name="list_of_recent_game_events">Overzicht recente spelgebeurtenissen</string>
+    <string name="end_of_turn">Einde beurt</string>
+    <string name="foul">Fout</string>
 </resources>

@@ -36,7 +36,7 @@ public class GameEvent {
                 return String.format("%s made a break of %d and made a foul on %s.", getPlayer().getFirstname(), getEndedBreak().getTotalPoints(),
                         getBall().getFoulPoints());
         }
-        return "In this event, there was nothing...";
+        return "In this event, there was but a strange void...";
     }
 
 

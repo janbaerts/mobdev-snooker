@@ -120,6 +120,14 @@ public class Player implements Comparable<Player> {
         return String.format("%s. %s", getFirstname().charAt(0), getLastname());
     }
 
+    @Exclude
+    public String getDisplayName(Player otherPlayer) {
+        if (this.getFirstname().equals(otherPlayer.getFirstname()))
+            return getAbbreviatedName();
+        else
+            return getFirstname();
+    }
+
     // TODO: Fix compareTo, equals and hashCode.
     @Override
     public int compareTo(Player p) {

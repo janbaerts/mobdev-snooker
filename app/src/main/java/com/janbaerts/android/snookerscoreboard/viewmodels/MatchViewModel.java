@@ -47,8 +47,8 @@ public class MatchViewModel extends ViewModel {
     }
 
 
-    public int getCurrentFrame() {
-        return currentFrame;
+    public Frame getCurrentFrame() {
+        return frames[currentFrame];
     }
 
     public void setCurrentFrame(int currentFrame) {
@@ -72,8 +72,8 @@ public class MatchViewModel extends ViewModel {
     }
 
     // TODO: Clean up getScore and setScore and calculate it from frames.
-    public int[] getScore() {
-        return score;
+    public String getScore() {
+        return String.format("%d (%d) %d", score[0], maxNumberOfFrames, score[1]);
     }
 
     public void setScore(int[] score) {
