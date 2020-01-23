@@ -7,6 +7,20 @@
     android:background="#FFFFFF"
     tools:context=".MatchActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/firstPlayerScoreTextView"
         android:layout_width="135dp"
@@ -132,7 +146,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:columnCount="3"
+        android:columnCount="5"
+        android:rowCount="2"
         app:layout_constraintBottom_toTopOf="@+id/endOfTurnButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,31 +155,33 @@
 
         <ImageButton
             android:id="@+id/yellowBallButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal|fill_vertical"
             android:backgroundTint="#00FFFFFF"
             android:cropToPadding="false"
             android:foregroundGravity="center_vertical"
+            android:onClick="ballTapped"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/yellowball" />
 
         <ImageButton
             android:id="@+id/greenBallButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
             android:cropToPadding="false"
+            android:onClick="ballTapped"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/greenball" />
 
         <ImageButton
             android:id="@+id/brownBallButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
@@ -174,8 +191,8 @@
 
         <ImageButton
             android:id="@+id/blueBallButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
@@ -185,8 +202,8 @@
 
         <ImageButton
             android:id="@+id/pinkBallButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
@@ -196,8 +213,8 @@
 
         <ImageButton
             android:id="@+id/blackBallButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
@@ -207,8 +224,8 @@
 
         <ImageButton
             android:id="@+id/cueBallButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
@@ -218,8 +235,8 @@
 
         <ImageButton
             android:id="@+id/redBallButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
@@ -229,8 +246,8 @@
             app:srcCompat="@drawable/redball" />
 
         <LinearLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:orientation="vertical">
@@ -241,6 +258,7 @@
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
+                android:onClick="toggleFoul"
                 android:text="@string/foul" />
 
             <Button

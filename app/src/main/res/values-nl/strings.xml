@@ -49,4 +49,5 @@
     <string name="end_of_turn">Einde beurt</string>
     <string name="foul">Fout</string>
     <string name="undo">Terug</string>
+    <string name="must_choose_2_players">Je moet 2 spelers kiezen.</string>
 </resources>

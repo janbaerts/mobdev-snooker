@@ -21,6 +21,7 @@
     <string name="player_image">Player picture</string>
     <string name="select_player_1">Select player 1</string>
     <string name="select_player_2">Select player 2</string>
+    <string name="must_choose_2_players">You must select 2 players.</string>
 
     <!--    search-player-fragment-->
     <string name="search">Search</string>

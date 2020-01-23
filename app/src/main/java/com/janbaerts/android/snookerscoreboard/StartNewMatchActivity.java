@@ -6,12 +6,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.janbaerts.android.snookerscoreboard.fragments.SelectPlayerFragment;
 import com.janbaerts.android.snookerscoreboard.models.Player;
@@ -65,6 +67,18 @@ public class StartNewMatchActivity
     @Override
     public void tappedOnPlayer(View view) {
         savePlayer(view);
+    }
+
+    public void startMatch(View view) {
+        Intent intent = new Intent(this, MatchActivity.class);
+        Bundle bundle = new Bundle();
+        if (players[0] != null && players[1] != null) {
+            bundle.putString("firstPlayer", players[0].getEmail());
+            bundle.putString("secondPlayer", players[1].getEmail());
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.must_choose_2_players), Toast.LENGTH_SHORT);
+        }
     }
 
     public void savePlayer(View view) {

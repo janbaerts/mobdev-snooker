@@ -2,6 +2,7 @@ package com.janbaerts.android.snookerscoreboard.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 
+import com.janbaerts.android.snookerscoreboard.MatchActivity;
 import com.janbaerts.android.snookerscoreboard.models.Frame;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 
@@ -25,6 +26,16 @@ public class MatchViewModel extends ViewModel {
 
 
     // Constructors
+    public MatchViewModel() {
+        int maxNumberOfFrames = 3;
+        this.maxNumberOfFrames = maxNumberOfFrames;
+        frames = new Frame[this.maxNumberOfFrames];
+        players = new Player[2];
+        matchStarter = (new Random()).nextInt() % 2;
+        currentFrame = 0;
+        frames[currentFrame] = new Frame();
+    }
+
     public MatchViewModel(int maxNumberOfFrames, Player firstPlayer, Player secondPlayer) {
         this.maxNumberOfFrames = maxNumberOfFrames;
         frames = new Frame[this.maxNumberOfFrames];
@@ -37,8 +48,6 @@ public class MatchViewModel extends ViewModel {
     }
 
 
-
-
     // Getters and setters
     public void setStartingDateTime() {
         this.startingDateTime = new Date();
@@ -48,7 +57,9 @@ public class MatchViewModel extends ViewModel {
 
 
     public Frame getCurrentFrame() {
-        return frames[currentFrame];
+        if (frames != null)
+            return frames[currentFrame];
+        return null;
     }
 
     public void setCurrentFrame(int currentFrame) {
