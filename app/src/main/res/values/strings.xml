@@ -69,5 +69,6 @@
     <string name="list_of_recent_game_events">List of recent game events</string>
     <string name="end_of_turn">End of turn</string>
     <string name="foul">Foul</string>
+    <string name="undo">Undo</string>
 
 </resources>

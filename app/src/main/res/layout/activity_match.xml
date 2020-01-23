@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MatchActivity">
 
     <TextView
@@ -123,7 +124,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TableLayout
+    <GridLayout
         android:id="@+id/snookerballLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -138,7 +139,7 @@
         app:layout_constraintTop_toBottomOf="@+id/gameEventListThree">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/yellowBallButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_columnWeight="1"
@@ -146,97 +147,110 @@
             android:backgroundTint="#00FFFFFF"
             android:cropToPadding="false"
             android:foregroundGravity="center_vertical"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/yellowball"
-            tools:layout_editor_absoluteX="51dp"
-            tools:layout_editor_absoluteY="391dp" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/yellowball" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/greenBallButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
             android:cropToPadding="false"
-            android:foregroundGravity="center_vertical"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/greenball"
-            tools:layout_editor_absoluteX="174dp"
-            tools:layout_editor_absoluteY="391dp" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/greenball" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/brownBallButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
             android:cropToPadding="false"
-            android:foregroundGravity="center_vertical"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/brownball"
-            tools:layout_editor_absoluteX="284dp"
-            tools:layout_editor_absoluteY="391dp" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/brownball" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/blueBallButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="16dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
             android:cropToPadding="false"
-            android:foregroundGravity="center_vertical"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/endOfTurnButton"
-            app:layout_constraintStart_toEndOf="@+id/imageButton5"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/blueball" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/pinkBallButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="16dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
             android:cropToPadding="false"
-            android:foregroundGravity="center_vertical"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toEndOf="@+id/imageButton6"
-            app:srcCompat="@drawable/pinkball"
-            tools:layout_editor_absoluteY="567dp" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/pinkball" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/blackBallButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
             android:cropToPadding="false"
-            android:foregroundGravity="center_vertical"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/endOfTurnButton"
-            app:layout_constraintStart_toStartOf="@+id/endOfTurnButton"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/blackball" />
 
         <ImageButton
-            android:id="@+id/imageButton7"
+            android:id="@+id/cueBallButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
             android:cropToPadding="false"
-            android:foregroundGravity="center_vertical"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/cueball"
-            tools:layout_editor_absoluteX="51dp"
-            tools:layout_editor_absoluteY="291dp" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/cueball" />
 
         <ImageButton
-            android:id="@+id/imageButton8"
+            android:id="@+id/redBallButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
+            android:contentDescription="Red ball"
             android:cropToPadding="false"
-            android:foregroundGravity="center_vertical"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/redball"
-            tools:layout_editor_absoluteX="174dp"
-            tools:layout_editor_absoluteY="291dp" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/redball" />
 
-    </TableLayout>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/foulButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:text="@string/foul" />
+
+            <Button
+                android:id="@+id/undoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/undo" />
+
+        </LinearLayout>
+
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
