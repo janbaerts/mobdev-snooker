@@ -50,4 +50,13 @@
     <string name="foul">Fout</string>
     <string name="undo">Terug</string>
     <string name="must_choose_2_players">Je moet 2 spelers kiezen.</string>
+    <string name="black_ball">Zwarte bal</string>
+    <string name="blue_ball">Blauwe bal</string>
+    <string name="brown_ball">Bruine bal</string>
+    <string name="cue_ball">Speelbal</string>
+    <string name="green_ball">Groene bal</string>
+    <string name="pink_ball">Roze bal</string>
+    <string name="red_ball">Rode bal</string>
+    <string name="yellow_ball">Gele bal</string>
+    <string name="points_remaining">Punten op tafel:</string>
 </resources>

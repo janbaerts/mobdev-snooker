@@ -1,42 +1,52 @@
 package com.janbaerts.android.snookerscoreboard.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Break {
     private Player breakBuilder;
-    private Ball[] pottedBalls;
-    private int firstAvailableSlot;
+    private List<Ball> pottedBalls;
 
     public Break() { }
 
     public Break(Player player) {
-        this.pottedBalls = new Ball[38];
+        this.pottedBalls = new ArrayList<>();
         this.breakBuilder = player;
-        this.firstAvailableSlot = 0;
     }
 
-    public Break(Player player, Ball[] balls) {
+    public Break(Player player, List<Ball> pottedBalls) {
         this.breakBuilder = player;
-        this.pottedBalls = balls;
-        setFirstAvailableSlot();
+        this.pottedBalls = pottedBalls;
     }
-
-    public void setFirstAvailableSlot() {
-        int firstNullIndex = 0;
-        while (pottedBalls[firstNullIndex] != null)
-            firstNullIndex++;
-        firstAvailableSlot = firstNullIndex;
-    }
-
-    public int getFirstAvailableSlot() {
-        return firstAvailableSlot;
-    }
-    public void incrementFirstAvailableSlot() { firstAvailableSlot++; }
-    public void decrementFirstAvailableSlot() { firstAvailableSlot--; }
 
     public int getTotalPoints() {
         int sum = 0;
-        for (int i = 0; i <= firstAvailableSlot; i++)
-            sum += pottedBalls[i].getPoints();
+        if (pottedBalls.size() != 0) {
+            for (Ball b : pottedBalls)
+                sum += b.getPoints();
+        }
         return sum;
+    }
+
+    public void pushPot(Ball ball) {
+        this.pottedBalls.add(ball);
+    }
+
+    public void popPot() {
+        this.pottedBalls.remove(this.pottedBalls.size() - 1);
+    }
+
+    public Ball getLastBall() {
+        return this.pottedBalls.get(this.pottedBalls.size() - 1);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Current break = ");
+        for (Ball b : pottedBalls)
+            sb.append(b.getDescription() + " / ");
+        return sb.toString();
     }
 
 }

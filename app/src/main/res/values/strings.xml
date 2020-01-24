@@ -71,5 +71,15 @@
     <string name="end_of_turn">End of turn</string>
     <string name="foul">Foul</string>
     <string name="undo">Undo</string>
-
+    <string name="maximum_score" translatable="false">147</string>
+    <string name="maximum_frame_score" translatable="false">18 (35) 17</string>
+    <string name="cue_ball">Cueball</string>
+    <string name="red_ball">Red ball</string>
+    <string name="yellow_ball">Yellow ball</string>
+    <string name="green_ball">Green ball</string>
+    <string name="brown_ball">Brown ball</string>
+    <string name="blue_ball">Blue ball</string>
+    <string name="pink_ball">Pink ball</string>
+    <string name="black_ball">Black ball</string>
+    <string name="points_remaining">Points remaining on table:</string>
 </resources>

@@ -18,11 +18,12 @@ public class Frame {
     private List<GameEvent> events;
     private List<Break> breaks;
 
-    public Frame() {
-        score = new int[0];
+    public Frame(int startingPlayer) {
+        score = new int[2];
         remainingBalls = 6 + NUMBER_OF_REDS;
         breaks = new ArrayList<>();
         events = new ArrayList<>();
+        turn = startingPlayer;
         // TODO: Initialize remainingBalls.
     }
 
@@ -32,12 +33,31 @@ public class Frame {
         return score[playerIndex];
     }
 
-    public void setScore(int playerIndex, int points) {
+    public void addPoints(int playerIndex, int points) {
         this.score[playerIndex] += points;
     }
 
+    public void subtractScore(int playerIndex, int points) {
+        this.score[playerIndex] -= points;
+    }
+
+    public void addBall() { this.remainingBalls++; }
+    public void removeBall() { this.remainingBalls--; }
+    public int getRemainingBalls() { return this.remainingBalls; }
+
     public int getMaximumRemainingPoints(Break currentBreak) {
-        return 0;
+        int remainingPoints = 0;
+        if (remainingBalls > 6) {
+            remainingPoints = ((remainingBalls - 6) * 8) + 27;
+            if (currentBreak.getTotalPoints() != 0 && currentBreak.getLastBall() == Ball.RED)
+            {
+                remainingPoints += 7;
+            }
+        } else {
+            for (int i = remainingBalls; i > 0; i--)
+                remainingPoints += 8 - i;
+        }
+        return remainingPoints;
     }
 
     public List<Break> getBreaks() {
@@ -50,6 +70,10 @@ public class Frame {
 
     public Break popBreak() {
         return this.breaks.remove(this.breaks.size() - 1);
+    }
+
+    public Break getLastBreak() {
+        return this.breaks.get(this.breaks.size() - 1);
     }
 
     public List<GameEvent> getEvents() {
@@ -73,4 +97,8 @@ public class Frame {
             result[numberOfEvents - 1 - i] = this.events.get(lastIndex - i);
         return result;
     }
+
+    public int getTurn() { return turn; }
+    public void nextTurn() { this.turn++; }
+    public void revertTurn() { this.turn--; }
 }

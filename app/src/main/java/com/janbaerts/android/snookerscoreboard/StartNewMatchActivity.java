@@ -15,6 +15,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.janbaerts.android.snookerscoreboard.data.FavouriteBall;
 import com.janbaerts.android.snookerscoreboard.fragments.SelectPlayerFragment;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 import com.janbaerts.android.snookerscoreboard.recyclerviews.SearchPlayerRecyclerViewAdapter;
@@ -71,10 +72,15 @@ public class StartNewMatchActivity
 
     public void startMatch(View view) {
         Intent intent = new Intent(this, MatchActivity.class);
-        Bundle bundle = new Bundle();
+
+        // For testing purposes:
+        players[0] = new Player("Jan", "Baerts", "jb@hotmail.com", FavouriteBall.BLUEBALL);
+        players[1] = new Player("Ethan", "Baerts", "eb@hotmail.com", FavouriteBall.BLACKBALL);
+
         if (players[0] != null && players[1] != null) {
-            bundle.putString("firstPlayer", players[0].getEmail());
-            bundle.putString("secondPlayer", players[1].getEmail());
+            intent.putExtra("firstPlayer", players[0].getEmail());
+            intent.putExtra("secondPlayer", players[1].getEmail());
+            intent.putExtra("maxNumberOfFrames", numberPicker.getDisplayedValues()[numberPicker.getValue()]);
             startActivity(intent);
         } else {
             Toast.makeText(this, getResources().getString(R.string.must_choose_2_players), Toast.LENGTH_SHORT);

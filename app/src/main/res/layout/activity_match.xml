@@ -27,7 +27,7 @@
         android:layout_height="110dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="156"
+        android:text="@string/maximum_score"
         android:textAlignment="center"
         android:textSize="78sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         android:layout_height="110dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="148"
+        android:text="@string/maximum_score"
         android:textAlignment="center"
         android:textSize="78sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,11 +72,10 @@
         app:layout_constraintTop_toBottomOf="@+id/secondPlayerScoreTextView" />
 
     <TextView
-        android:id="@+id/gameEventHeaderTextView"
+        android:id="@+id/remainingPointsTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/list_of_recent_game_events"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/secondPlayerNameTextView"
         app:layout_constraintStart_toStartOf="@+id/firstPlayerNameTextView"
@@ -86,18 +85,17 @@
         android:id="@+id/gameEventListOne"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="8dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/secondPlayerNameTextView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/firstPlayerNameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/gameEventHeaderTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/remainingPointsTextView" />
 
     <TextView
         android:id="@+id/gameEventListTwo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/secondPlayerNameTextView"
         app:layout_constraintHorizontal_bias="0.0"
@@ -108,7 +106,6 @@
         android:id="@+id/gameEventListThree"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/secondPlayerNameTextView"
         app:layout_constraintHorizontal_bias="0.0"
@@ -119,7 +116,7 @@
         android:id="@+id/framesScoredTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/player_1"
+        android:text="@string/maximum_frame_score"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/secondPlayerScoreTextView"
         app:layout_constraintEnd_toStartOf="@+id/secondPlayerScoreTextView"
@@ -134,6 +131,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/end_of_turn"
+        android:onClick="endOfTurnTapped"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -146,12 +144,25 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:columnCount="5"
+        android:columnCount="4"
         android:rowCount="2"
-        app:layout_constraintBottom_toTopOf="@+id/endOfTurnButton"
+        app:layout_constraintBottom_toTopOf="@+id/foulButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameEventListThree">
+
+        <ImageButton
+            android:id="@+id/cueBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/cue_ball"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:onClick="ballTapped"
+            app:srcCompat="@drawable/cueball" />
 
         <ImageButton
             android:id="@+id/yellowBallButton"
@@ -160,6 +171,7 @@
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal|fill_vertical"
             android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/yellow_ball"
             android:cropToPadding="false"
             android:foregroundGravity="center_vertical"
             android:onClick="ballTapped"
@@ -173,6 +185,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/green_ball"
             android:cropToPadding="false"
             android:onClick="ballTapped"
             android:scaleType="fitCenter"
@@ -185,53 +198,11 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/brown_ball"
             android:cropToPadding="false"
             android:scaleType="fitCenter"
+            android:onClick="ballTapped"
             app:srcCompat="@drawable/brownball" />
-
-        <ImageButton
-            android:id="@+id/blueBallButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:cropToPadding="false"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/blueball" />
-
-        <ImageButton
-            android:id="@+id/pinkBallButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:cropToPadding="false"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/pinkball" />
-
-        <ImageButton
-            android:id="@+id/blackBallButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:cropToPadding="false"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/blackball" />
-
-        <ImageButton
-            android:id="@+id/cueBallButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:cropToPadding="false"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/cueball" />
 
         <ImageButton
             android:id="@+id/redBallButton"
@@ -240,35 +211,73 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:backgroundTint="#00FFFFFF"
-            android:contentDescription="Red ball"
+            android:contentDescription="@string/red_ball"
             android:cropToPadding="false"
             android:scaleType="fitCenter"
+            android:onClick="ballTapped"
             app:srcCompat="@drawable/redball" />
 
-        <LinearLayout
+        <ImageButton
+            android:id="@+id/blackBallButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:orientation="vertical">
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/black_ball"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:onClick="ballTapped"
+            app:srcCompat="@drawable/blackball" />
 
-            <Button
-                android:id="@+id/foulButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:onClick="toggleFoul"
-                android:text="@string/foul" />
+        <ImageButton
+            android:id="@+id/pinkBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/pink_ball"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:onClick="ballTapped"
+            app:srcCompat="@drawable/pinkball" />
 
-            <Button
-                android:id="@+id/undoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/undo" />
-
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/blueBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/blue_ball"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:onClick="ballTapped"
+            app:srcCompat="@drawable/blueball" />
 
     </GridLayout>
+
+    <Button
+        android:id="@+id/foulButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:onClick="toggleFoul"
+        android:text="@string/foul"
+        app:layout_constraintBottom_toTopOf="@+id/endOfTurnButton"
+        app:layout_constraintEnd_toStartOf="@id/undoButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/undoButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/undo"
+        android:onClick="undoTapped"
+        app:layout_constraintBottom_toTopOf="@+id/endOfTurnButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/foulButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

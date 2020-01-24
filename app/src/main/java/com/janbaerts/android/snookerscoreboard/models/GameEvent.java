@@ -1,6 +1,5 @@
 package com.janbaerts.android.snookerscoreboard.models;
 
-import com.janbaerts.android.snookerscoreboard.R;
 import com.janbaerts.android.snookerscoreboard.data.GameEventType;
 
 public class GameEvent {
@@ -9,32 +8,30 @@ public class GameEvent {
     private Ball ball;
     private Player player; // Important: This is the player who receives points as a result of this GameEvent.
     private Break endedBreak;
+    private String otherPlayerName;
+    private int playerIndex;
+    private int eventIndex;
 
-    public GameEvent(GameEventType type, Ball ball, Player player, Break endedBreak) {
-        setType(type);
-        setBall(ball);
-        setPlayer(player);
-        setEndedBreak(endedBreak);
-    }
+    public GameEvent() { }
 
-    @Override
     public String toString() {
         switch (getType()) {
+            // TODO: Make use of getDisplayName().
             case END_OF_TURN:
-                return String.format("End of turn for %s.", getPlayer().getFirstname());
+                return String.format("%d. End of turn for %s.", eventIndex, getPlayer().getFirstname());
             case POT:
-                return String.format("%s potted %s.", getPlayer().getFirstname(), getBall().name());
+                return String.format("%d. %s potted %s.", eventIndex, getPlayer().getFirstname(), getBall().getDescription());
             case FOUL:
                 if (ball.getPoints() == 0)
-                    return String.format("%s went in-off.", getPlayer().getFirstname());
-                return String.format("%s made a foul on %s.", getPlayer().getFirstname(), getBall().name());
+                    return String.format("%d. %s went in-off.", eventIndex, otherPlayerName);
+                return String.format("%d. %s made a foul on %s.", eventIndex, otherPlayerName, getBall().getDescription());
             case END_OF_BREAK:
-                return String.format("%s made a break of %d.", getPlayer().getFirstname(), getEndedBreak().getTotalPoints());
+                return String.format("%d. %s made a break of %d.", eventIndex, getPlayer().getFirstname(), getEndedBreak().getTotalPoints());
             case END_OF_BREAK_FOUL:
                 if (ball.getPoints() == 0)
-                    return String.format("%s made a break of %d and went in-off.", getPlayer().getFirstname(), getEndedBreak().getTotalPoints());
-                return String.format("%s made a break of %d and made a foul on %s.", getPlayer().getFirstname(), getEndedBreak().getTotalPoints(),
-                        getBall().getFoulPoints());
+                    return String.format("%d. %s made a break of %d and went in-off.", eventIndex, otherPlayerName, getEndedBreak().getTotalPoints());
+                return String.format("%d. %s made a break of %d and made a foul on %s.", eventIndex, otherPlayerName, getEndedBreak().getTotalPoints(),
+                        getBall().getDescription());
         }
         return "In this event, there was but a strange void...";
     }
@@ -64,11 +61,35 @@ public class GameEvent {
         this.player = player;
     }
 
+    public int getPlayerIndex() {
+        return playerIndex;
+    }
+
+    public void setPlayerIndex(int playerIndex) {
+        this.playerIndex = playerIndex;
+    }
+
+    public String getOtherPlayerName() {
+        return otherPlayerName;
+    }
+
+    public void setOtherPlayerName(String otherPlayerName) {
+        this.otherPlayerName = otherPlayerName;
+    }
+
     public Break getEndedBreak() {
         return endedBreak;
     }
 
     public void setEndedBreak(Break endedBreak) {
         this.endedBreak = endedBreak;
+    }
+
+    public int getEventIndex() {
+        return eventIndex;
+    }
+
+    public void setEventIndex(int eventIndex) {
+        this.eventIndex = eventIndex;
     }
 }

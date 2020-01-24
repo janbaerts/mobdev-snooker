@@ -11,11 +11,12 @@ public enum Ball {
     WHITE("the cue ball", 0, 4);
 
     private String name;
+    private String description;
     private int points;
     private int foulPoints;
 
-    Ball(String name, int points, int foulPoints) {
-        this.name = name;
+    Ball(String description, int points, int foulPoints) {
+        this.description = description;
         this.points = points;
         this.foulPoints = foulPoints;
     }
@@ -27,4 +28,6 @@ public enum Ball {
     public int getFoulPoints() {
         return this.foulPoints;
     }
+
+    public String getDescription() { return this.description; }
 }
