@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/endFrame"
+        android:title="@string/end_frame"/>
+    <group
+        android:id="@+id/ballGroup">
+        <item
+            android:id="@+id/addBall"
+            android:title="@string/add_ball"
+            />
+        <item
+            android:id="@+id/removeBall"
+            android:title="@string/remove_ball"
+            />
+    </group>
+
+</menu>

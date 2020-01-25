@@ -1,12 +1,17 @@
 package com.janbaerts.android.snookerscoreboard;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -58,10 +63,16 @@ public class MatchActivity extends AppCompatActivity {
         initializeMatchViewModel();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.match_menu, menu);
+        return true;
+    }
 
     public void updateUI() {
-        remainingPointsTextView.setText(String.format("%s %d", getString(R.string.points_remaining),
-                match.getCurrentFrame().getMaximumRemainingPoints(match.getCurrentBreak())));
+        remainingPointsTextView.setText(String.format("%d %s", match.getCurrentFrame().getMaximumRemainingPoints(match.getCurrentBreak()),
+                getString(R.string.points_remaining)));
         fillEventList();
         framesScoredTextView.setText(match.getScore());
         for (int i = 0; i < 2; i++) {
@@ -151,20 +162,71 @@ public class MatchActivity extends AppCompatActivity {
         GameEvent gameEvent = new GameEvent();
         gameEvent.setEventIndex(match.getCurrentFrame().getEvents().size() + 1);
         System.out.println(match.getCurrentBreak().toString());
-        gameEvent.setEndedBreak(match.getCurrentFrame().getLastBreak());
+
         if (match.getCurrentBreak().getTotalPoints() > 0) {
             gameEvent.setType(GameEventType.END_OF_BREAK);
             gameEvent.setPlayer(match.getPlayers()[match.getPlayerAtTableIndex()]);
+            match.getCurrentFrame().pushBreak(match.getCurrentBreak());
+            gameEvent.setEndedBreak(match.getCurrentFrame().getLastBreak());
         }
         else {
             gameEvent.setType(GameEventType.END_OF_TURN);
             gameEvent.setPlayer(match.getPlayers()[match.getPlayerAtTableIndex()]);
         }
+
         match.getCurrentFrame().pushEvent(gameEvent);
-        match.getCurrentFrame().pushBreak(match.getCurrentBreak());
         match.setCurrentBreak(new Break(match.getPlayers()[match.getPlayerAtTableIndex()]));
         match.nextTurn();
         updateUI();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.addBall:
+                match.getCurrentFrame().addBall();
+                return true;
+            case R.id.removeBall:
+                match.getCurrentFrame().removeBall();
+                return true;
+            case R.id.endFrame:
+                Player frameLeader = match.getFrameLeader();
+                if (frameLeader != null) {
+                    confirmEndOfFrame(frameLeader);
+                } else {
+                    Toast.makeText(this, getString(R.string.cannot_end_frame), Toast.LENGTH_SHORT);
+                }
+            default:
+                return false;
+
+        }
+    }
+
+    private void confirmEndOfFrame(Player frameLeader) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.confirm_end_of_frame);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Player matchWinner = match.endFrame(frameLeader);
+                updateUI();
+                if (matchWinner != null) {
+                    endMatch();
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Close dialog.
+            }
+        });
+        builder.show();
+    }
+
+    private void endMatch() {
+        Toast.makeText(this, "GAME OVER", Toast.LENGTH_SHORT);
+        this.finish();
     }
 
     private Ball getBallFromView(View view) {
@@ -275,6 +337,10 @@ public class MatchActivity extends AppCompatActivity {
 
     private void fillEventList() {
         GameEvent[] requestedList = match.getCurrentFrame().getLastEvents(this.eventList.length);
+
+        for (TextView tv : eventList)
+            tv.setText("");
+
         if (requestedList != null) {
             for (int i = 0; i < requestedList.length; i++) {
                 eventList[i].setText(requestedList[i].toString());

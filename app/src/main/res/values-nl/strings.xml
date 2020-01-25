@@ -58,5 +58,12 @@
     <string name="pink_ball">Roze bal</string>
     <string name="red_ball">Rode bal</string>
     <string name="yellow_ball">Gele bal</string>
-    <string name="points_remaining">Punten op tafel:</string>
+    <string name="points_remaining">punten op tafel</string>
+    <string name="add_ball">Bal toevoegen</string>
+    <string name="end_frame">Beëindig frame</string>
+    <string name="remove_ball">Bal verwijderen</string>
+    <string name="cannot_end_frame">Sorry, het staat gelijk. Je kan het frame nu niet beëindigen.</string>
+    <string name="confirm_end_of_frame">Ben je zeker dat je het frame wil beëindigen?</string>
+    <string name="cancel">Annuleer</string>
+    <string name="match_won">Proficiat %s, je hebt gewonnen!</string>
 </resources>

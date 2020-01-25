@@ -13,8 +13,6 @@ public class Frame {
     private int remainingBalls;
     private int turn;
 
-    private boolean isDownToTheColors;
-
     private List<GameEvent> events;
     private List<Break> breaks;
 
@@ -32,6 +30,7 @@ public class Frame {
     public int getScore(int playerIndex) {
         return score[playerIndex];
     }
+    public int[] getScore() { return this.score; }
 
     public void addPoints(int playerIndex, int points) {
         this.score[playerIndex] += points;
@@ -69,7 +68,10 @@ public class Frame {
     }
 
     public Break popBreak() {
-        return this.breaks.remove(this.breaks.size() - 1);
+        if (this.breaks.size() > 0)
+            return this.breaks.remove(this.breaks.size() - 1);
+        else
+            return null;
     }
 
     public Break getLastBreak() {

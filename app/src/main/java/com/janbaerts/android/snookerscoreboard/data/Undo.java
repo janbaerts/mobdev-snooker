@@ -24,7 +24,7 @@ public class Undo {
 
     public Break undo() {
         System.out.println("GameEvent index = " + gameEvent.getEventIndex());
-        if (gameEvent.getEventIndex() == 1) {
+        if (gameEvent.getEventIndex() == 0) {
             Log.w("UNDO", "There are no more events to undo.");
             return null;
         }

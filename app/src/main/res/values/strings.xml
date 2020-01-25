@@ -9,6 +9,8 @@
     <string name="log_in">Log in</string>
     <string name="log_out">Log out</string>
     <string name="sign_up">Sign up</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="cancel">Cancel</string>
 
     <!--    activity-start-new-game-->
     <string name="player_1">Player 1</string>
@@ -81,5 +83,13 @@
     <string name="blue_ball">Blue ball</string>
     <string name="pink_ball">Pink ball</string>
     <string name="black_ball">Black ball</string>
-    <string name="points_remaining">Points remaining on table:</string>
+    <string name="points_remaining">points remaining</string>
+    <string name="cannot_end_frame">Sorry, scores are equal. You cannot end the frame.</string>
+    <string name="confirm_end_of_frame">Are you sure you want to end the frame?</string>
+    <string name="match_won">Congratulations %s, you\'ve won!</string>
+
+    <string name="end_frame">End frame</string>
+    <string name="add_ball">Add ball</string>
+    <string name="remove_ball">Remove ball</string>
+
 </resources>

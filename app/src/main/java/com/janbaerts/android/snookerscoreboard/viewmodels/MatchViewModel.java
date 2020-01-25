@@ -1,5 +1,7 @@
 package com.janbaerts.android.snookerscoreboard.viewmodels;
 
+import android.widget.Toast;
+
 import androidx.lifecycle.ViewModel;
 
 import com.janbaerts.android.snookerscoreboard.models.Break;
@@ -42,6 +44,24 @@ public class MatchViewModel extends ViewModel {
 //        setCurrentBreak(new Break());
     }
 
+    public Player endFrame(Player frameLeader) {
+        score[getPlayerIndex(frameLeader)]++;
+        Player matchWinner = getMatchWinner();
+        if (matchWinner != null) {
+            return matchWinner;
+        } else {
+            cleanUpLastFrame();
+            currentFrame++;
+            frames[currentFrame] = new Frame((matchStarter + currentFrame) % 2);
+            setCurrentBreak(new Break(players[(matchStarter + currentFrame) % 2]));
+        }
+        return null;
+    }
+
+    private void cleanUpLastFrame() {
+        // TODO: Save frame statistics.
+
+    }
 
     // Getters and setters
     public void setStartingDateTime() {
@@ -85,6 +105,10 @@ public class MatchViewModel extends ViewModel {
         this.maxNumberOfFrames = maxNumberOfFrames;
     }
 
+    public int getNumberOfFramesToWin() {
+        return (getMaxNumberOfFrames() / 2) + 1;
+    }
+
     // TODO: Clean up getScore and setScore and calculate it from frames.
     public String getScore() {
         return String.format("%d (%d) %d", score[0], maxNumberOfFrames, score[1]);
@@ -110,12 +134,38 @@ public class MatchViewModel extends ViewModel {
         this.players = players;
     }
 
+    public int getPlayerIndex(Player player) {
+        if (player.getEmail().equals(players[0].getEmail()))
+            return 0;
+        else
+            return 1;
+    }
+
+    public Player getPlayer(int playerIndex) {
+        return players[playerIndex];
+    }
+
+    public Player getFrameLeader() {
+        int[] frameScore = getCurrentFrame().getScore();
+        if (frameScore[0] > frameScore[1]) {
+            return players[0];
+        } else if (frameScore[0] < frameScore[1]) {
+            return players[1];
+        } else return null;
+    }
+
+    public Player getMatchWinner() {
+        if (score[0] == getNumberOfFramesToWin())
+            return players[0];
+        if (score[1] == getNumberOfFramesToWin())
+            return players[1];
+        return null;
+    }
+
     public int getTurn() { return frames[currentFrame].getTurn(); }
 
     public void nextTurn() {
-        // TODO: Decide conditions for break-saving.
-        if (currentBreak.getTotalPoints() > 50)
-            players[getPlayerAtTableIndex()].addBreakToList(currentBreak);
+        // TODO: Decide conditions for break-saving and implement.
 
         frames[currentFrame].nextTurn();
         currentBreak = new Break(players[getPlayerAtTableIndex()]);
