@@ -29,7 +29,6 @@ public class Undo {
             return null;
         }
 
-        // TODO: When less than 3 events left, the list should be emptied accordingly.
         if (gameEvent.getType() == GameEventType.END_OF_TURN) {
             frame.revertTurn();
             frame.popBreak();

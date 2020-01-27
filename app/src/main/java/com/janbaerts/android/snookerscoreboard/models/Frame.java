@@ -22,10 +22,7 @@ public class Frame {
         breaks = new ArrayList<>();
         events = new ArrayList<>();
         turn = startingPlayer;
-        // TODO: Initialize remainingBalls.
     }
-
-    // TODO: Come up with elegant scorekeeping.
 
     public int getScore(int playerIndex) {
         return score[playerIndex];

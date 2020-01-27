@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".MatchActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/firstPlayerScoreTextView"
+        android:layout_width="135dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/maximum_score"
+        android:textAlignment="center"
+        android:textSize="78sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/secondPlayerScoreTextView"
+        android:layout_width="135dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/maximum_score"
+        android:textAlignment="center"
+        android:textSize="78sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/firstPlayerNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/player_1"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/firstPlayerScoreTextView"
+        app:layout_constraintStart_toStartOf="@+id/firstPlayerScoreTextView"
+        app:layout_constraintTop_toBottomOf="@+id/firstPlayerScoreTextView" />
+
+    <TextView
+        android:id="@+id/secondPlayerNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/player_2"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/secondPlayerScoreTextView"
+        app:layout_constraintStart_toStartOf="@+id/secondPlayerScoreTextView"
+        app:layout_constraintTop_toBottomOf="@+id/secondPlayerScoreTextView" />
+
+    <TextView
+        android:id="@+id/remainingPointsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/points_remaining"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/firstPlayerScoreTextView"
+        app:layout_constraintEnd_toEndOf="@+id/gameEventListThree"
+        app:layout_constraintStart_toStartOf="@+id/gameEventListThree" />
+
+    <TextView
+        android:id="@+id/gameEventListOne"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/secondPlayerScoreTextView"
+        app:layout_constraintStart_toEndOf="@+id/firstPlayerScoreTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gameEventListTwo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/gameEventListOne"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/gameEventListOne"
+        app:layout_constraintTop_toBottomOf="@+id/gameEventListOne" />
+
+    <TextView
+        android:id="@+id/gameEventListThree"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/gameEventListTwo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/gameEventListTwo"
+        app:layout_constraintTop_toBottomOf="@+id/gameEventListTwo" />
+
+    <TextView
+        android:id="@+id/framesScoredTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/maximum_frame_score"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/firstPlayerNameTextView"
+        app:layout_constraintEnd_toStartOf="@+id/secondPlayerScoreTextView"
+        app:layout_constraintStart_toEndOf="@+id/firstPlayerScoreTextView" />
+
+
+    <GridLayout
+        android:id="@+id/snookerballLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:columnCount="5"
+        android:rowCount="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/firstPlayerNameTextView"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/foulAndUndoLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/foulButton"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="16dp"
+                android:onClick="toggleFoul"
+                android:text="@string/foul" />
+
+            <Button
+                android:id="@+id/undoButton"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="16dp"
+                android:onClick="undoTapped"
+                android:text="@string/undo" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/cueBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/cue_ball"
+            android:cropToPadding="false"
+            android:onClick="ballTapped"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/cueball" />
+
+        <ImageButton
+            android:id="@+id/yellowBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal|fill_vertical"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/yellow_ball"
+            android:cropToPadding="false"
+            android:foregroundGravity="center_vertical"
+            android:onClick="ballTapped"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/yellowball" />
+
+        <ImageButton
+            android:id="@+id/greenBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/green_ball"
+            android:cropToPadding="false"
+            android:onClick="ballTapped"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/greenball" />
+
+        <ImageButton
+            android:id="@+id/brownBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/brown_ball"
+            android:cropToPadding="false"
+            android:onClick="ballTapped"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/brownball" />
+
+        <Button
+            android:id="@+id/endOfTurnButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="endOfTurnTapped"
+            android:text="@string/end_of_turn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/redBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/red_ball"
+            android:cropToPadding="false"
+            android:onClick="ballTapped"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/redball" />
+
+        <ImageButton
+            android:id="@+id/blackBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/black_ball"
+            android:cropToPadding="false"
+            android:onClick="ballTapped"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/blackball" />
+
+        <ImageButton
+            android:id="@+id/pinkBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/pink_ball"
+            android:cropToPadding="false"
+            android:onClick="ballTapped"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/pinkball" />
+
+        <ImageButton
+            android:id="@+id/blueBallButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/blue_ball"
+            android:cropToPadding="false"
+            android:onClick="ballTapped"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/blueball" />
+
+    </GridLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

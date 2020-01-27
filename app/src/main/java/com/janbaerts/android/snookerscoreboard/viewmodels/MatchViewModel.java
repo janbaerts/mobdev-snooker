@@ -18,8 +18,6 @@ public class MatchViewModel extends ViewModel {
     private int currentFrame;
     private int matchStarter;
     private int maxNumberOfFrames;
-//    private int turn;
-    // TODO: Pass on data via Intent.
 
     private int[] score;
     private Frame[] frames;
