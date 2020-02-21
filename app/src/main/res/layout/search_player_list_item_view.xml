@@ -4,7 +4,7 @@
     android:layout_height="100dp"
     android:padding="8dp"
     android:textSize="18sp"
-    android:onClick="tappedOnPlayer"
+    android:onClick="choosePlayer"
     >
 
 </TextView>

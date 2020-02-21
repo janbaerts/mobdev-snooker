@@ -1,6 +1,7 @@
 package com.janbaerts.android.snookerscoreboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +15,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.janbaerts.android.snookerscoreboard.data.MatchSettingsData;
 import com.janbaerts.android.snookerscoreboard.models.Player;
+import com.janbaerts.android.snookerscoreboard.viewmodels.MatchSettingsViewModel;
 
 import java.util.List;
 
@@ -59,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         progressBar = findViewById(R.id.progressBar);
 
+        MatchSettingsData.matchSettingsViewModel = ViewModelProviders.of(this).get(MatchSettingsViewModel.class);
+
         database = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -73,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startNewGame(View view) {
-        Intent intent = new Intent(this, StartNewMatchActivity.class);
+//        Intent intent = new Intent(this, StartNewMatchActivity.class);
+        Intent intent = new Intent(this, MatchSettingsActivity.class);
         startActivity(intent);
     }
 

@@ -11,7 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MatchActivity"></activity>
+        <activity
+            android:name=".PlayerStatisticsActivity"
+            android:label="@string/player_statistics"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".MatchActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/log_in"
@@ -29,21 +37,21 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".PlayerStatisticsActivity"
-            android:label="@string/player_statistics"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity
-            android:name=".StartNewMatchActivity"
+            android:name=".MatchSettingsActivity"
             android:label="@string/title_activity_start_new_match"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.janbaerts.android.snookerscoreboard.MainActivity" />
+        </activity>
+        <activity android:name=".SelectPlayerActivity"
+            android:label="Select a player"
+            android:parentActivityName=".MatchSettingsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MatchSettingsActivity"/>
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>

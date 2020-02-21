@@ -16,7 +16,7 @@
     <string name="player_1">Player 1</string>
     <string name="player_2">Player 2</string>
     <string name="select_player">Select player</string>
-    <string name="max_number_of_frames">Maximum number of frames</string>
+    <string name="max_number_of_frames">Best of ...</string>
     <string name="none_selected">None selected</string>
     <string name="tap_to_select">Tap to select</string>
     <string name="explain_image">Tap image to choose one.</string>
@@ -91,8 +91,5 @@
     <string name="end_frame">End frame</string>
     <string name="add_ball">Add ball</string>
     <string name="remove_ball">Remove ball</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

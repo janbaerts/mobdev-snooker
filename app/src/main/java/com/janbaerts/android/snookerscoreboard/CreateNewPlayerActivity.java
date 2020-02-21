@@ -59,6 +59,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity
         infoTextView = findViewById(R.id.infoTextView);
         progressBar = findViewById(R.id.progressBar);
         favouriteBallImageView = findViewById(R.id.favouriteBallImageView);
+
         database = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
     }

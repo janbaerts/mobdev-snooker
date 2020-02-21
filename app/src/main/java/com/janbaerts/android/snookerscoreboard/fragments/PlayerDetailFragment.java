@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 
 import com.janbaerts.android.snookerscoreboard.R;
 
-public class StartNewMatchFragment extends Fragment {
+public class PlayerDetailFragment extends Fragment {
 
 
-    public StartNewMatchFragment() {
+    public static final String TAG = "PlayerDetailFragment";
+
+    public PlayerDetailFragment() {
         // Required empty public constructor
     }
 
@@ -22,7 +24,7 @@ public class StartNewMatchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_start_new_match, container, false);
+        return inflater.inflate(R.layout.fragment_player_detail, container, false);
     }
 
 }

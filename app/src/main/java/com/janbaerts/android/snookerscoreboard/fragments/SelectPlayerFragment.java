@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,7 +24,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.janbaerts.android.snookerscoreboard.R;
-import com.janbaerts.android.snookerscoreboard.StartNewMatchActivity;
+import com.janbaerts.android.snookerscoreboard.SelectPlayerActivity;
 import com.janbaerts.android.snookerscoreboard.data.FavouriteBall;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 import com.janbaerts.android.snookerscoreboard.recyclerviews.SearchPlayerRecyclerViewAdapter;
@@ -30,19 +32,19 @@ import com.janbaerts.android.snookerscoreboard.recyclerviews.SearchPlayerRecycle
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SelectPlayerFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SelectPlayerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+///**
+// * A simple {@link Fragment} subclass.
+// * Activities that contain this fragment must implement the
+// * {@link SelectPlayerFragment.OnFragmentInteractionListener} interface
+// * to handle interaction events.
+// * Use the {@link SelectPlayerFragment#newInstance} factory method to
+// * create an instance of this fragment.
+// */
 public class SelectPlayerFragment extends Fragment {
 
     public static final String TAG = "SelectPlayerFragment";
 
-    private OnFragmentInteractionListener interactionListener;
+//    private OnFragmentInteractionListener interactionListener;
     private List<Player> playerList = new ArrayList<>();
     private FirebaseFirestore db;
 
@@ -51,6 +53,8 @@ public class SelectPlayerFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private EditText searchPlayerEditText;
     private Button searchButton;
+
+    public SelectPlayerActivity selectPlayerActivity;
 
     public SelectPlayerFragment() { }
 
@@ -64,6 +68,7 @@ public class SelectPlayerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = FirebaseFirestore.getInstance();
+        selectPlayerActivity = (SelectPlayerActivity)getActivity();
 //        buildPlayerList();
     }
 
@@ -72,22 +77,20 @@ public class SelectPlayerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_select_player, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.playerListRecyclerView);
+        recyclerView = view.findViewById(R.id.playerListRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         adapter = new SearchPlayerRecyclerViewAdapter(playerList);
         recyclerView.setAdapter(adapter);
-        searchPlayerEditText = (EditText) view.findViewById(R.id.searchPlayerEditText);
+        searchPlayerEditText = view.findViewById(R.id.searchPlayerEditText);
         // TODO: Add player clear button.
-        searchButton = (Button) view.findViewById(R.id.searchButton);
+        searchButton = view.findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (searchPlayerEditText.getText().length() != 0)
                     searchPlayersWithSearchString();
-                else
-                    ((StartNewMatchActivity)getActivity()).hideSelectPlayerFragment();
             }
         });
         return view;
@@ -100,28 +103,28 @@ public class SelectPlayerFragment extends Fragment {
     }
 
     // Rename method, update argument and hook method into UI event
-    public void searchButtonPressed(View view) {
-        if (interactionListener != null) {
-            interactionListener.tappedOnPlayer(view);
-        }
-    }
+//    public void searchButtonPressed(View view) {
+//        if (interactionListener != null) {
+//            interactionListener.tappedOnPlayer(view);
+//        }
+//    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            interactionListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnFragmentInteractionListener) {
+//            interactionListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        interactionListener = null;
-    }
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        interactionListener = null;
+//    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -133,9 +136,9 @@ public class SelectPlayerFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        void tappedOnPlayer(View view);
-    }
+//    public interface OnFragmentInteractionListener {
+//        void tappedOnPlayer(View view);
+//    }
 
     public void searchPlayersWithSearchString() {
         // TODO: Enable case insensitive queries.
@@ -164,6 +167,7 @@ public class SelectPlayerFragment extends Fragment {
                                 System.out.println("Playerlist size = " + playerList.size());
                                 adapter = new SearchPlayerRecyclerViewAdapter(playerList);
                                 recyclerView.setAdapter(adapter);
+                                selectPlayerActivity.matchSettingsViewModel.setQueryResult(playerList);
                                 System.out.println(recyclerView.getAdapter().getItemCount());
                             }
                         });

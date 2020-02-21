@@ -3,23 +3,14 @@ package com.janbaerts.android.snookerscoreboard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 
-import com.janbaerts.android.snookerscoreboard.fragments.SelectPlayerFragment;
+import java.util.zip.Inflater;
 
-public class PlayerStatisticsActivity
-        extends AppCompatActivity
-        implements SelectPlayerFragment.OnFragmentInteractionListener {
+public class PlayerStatisticsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_statistics);
-    }
-
-    // TODO: Show how many times player potted their favourite ball.
-    @Override
-    public void tappedOnPlayer(View view) {
-
     }
 }
