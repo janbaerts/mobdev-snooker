@@ -1,6 +1,7 @@
 package com.janbaerts.android.snookerscoreboard;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -9,6 +10,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,10 +26,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.janbaerts.android.snookerscoreboard.data.AppConstants;
 import com.janbaerts.android.snookerscoreboard.data.MatchSettingsData;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 import com.janbaerts.android.snookerscoreboard.viewmodels.MatchSettingsViewModel;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -104,10 +110,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void recordNewPictureForPlayer(View view) {
-
+        if (user != null) {
+            Intent getPictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (getPictureIntent.resolveActivity(getPackageManager()) != null)
+                startActivityForResult(getPictureIntent, AppConstants.REQUEST_IMAGE_CAPTURE);
+        } else {
+            Log.e("JB", "User must be logged in.");
+        }
     }
 
-/// Helper methods ------------------------------------------------------------------------------
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AppConstants.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap image = (Bitmap)extras.get("data");
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            image.compress(Bitmap.CompressFormat.PNG, 53, baos);
+            savePictureToFirebase(baos.toByteArray());
+
+            playerPictureImageView.setImageBitmap(image);
+        }
+    }
+
+    /// Helper methods ------------------------------------------------------------------------------
     private void checkUserState() {
         progressBar.setVisibility(View.VISIBLE);
         user = firebaseAuth.getCurrentUser();
@@ -163,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadPlayerPicture() {
+        progressBar.setVisibility(View.VISIBLE);
         StorageReference location = storage.child(user.getEmail() + ".png");
         location.getBytes(1024 * 1024)
                 .addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -180,4 +207,23 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void savePictureToFirebase(byte[] image) {
+        StorageReference newPictureReference = storage.child(user.getEmail() + ".png");
+        UploadTask uploadTask = newPictureReference.putBytes(image);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("JB", e.getMessage());
+            }
+        })
+        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.i("JB", "Upload successful.");
+                loadPlayerPicture();
+            }
+        });
+    }
+
 }
