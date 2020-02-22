@@ -34,7 +34,6 @@
     <string name="passwords_do_not_match">Wachtwoorden komen niet overeen.</string>
     <string name="player_creation_failure">Sorry, het aanmaken van de speler is niet gelukt. Controleer of uw internetverbinding werkt.</string>
     <string name="player_signed_in">U bent aangemeld.</string>
-    <string name="sign_up">Aanmelden</string>
     <string name="title_activity_start_new_match">Start nieuwe wedstrijd</string>
     <string name="log_in">Inloggen</string>
     <string name="new_match">Nieuwe wedstrijd</string>
@@ -66,4 +65,6 @@
     <string name="confirm_end_of_frame">Ben je zeker dat je het frame wil beëindigen?</string>
     <string name="cancel">Annuleer</string>
     <string name="match_won">Proficiat %s, je hebt gewonnen!</string>
+    <string name="image_info">Indien ingelogd, tik op afbeelding om een nieuwe foto te maken.</string>
+    <string name="register">Registreer</string>
 </resources>

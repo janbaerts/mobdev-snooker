@@ -1,20 +1,28 @@
 package com.janbaerts.android.snookerscoreboard;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.janbaerts.android.snookerscoreboard.data.MatchSettingsData;
 import com.janbaerts.android.snookerscoreboard.models.Player;
 import com.janbaerts.android.snookerscoreboard.viewmodels.MatchSettingsViewModel;
@@ -25,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
 
-
     private TextView playerList;
     private Player lei;
     private Player jan;
@@ -34,16 +41,16 @@ public class MainActivity extends AppCompatActivity {
 
     TextView welcomeTextView;
 
-    Button newMatchButton;
-    Button signUpButton;
-    Button playerStatisticsButton;
-    Button loginButton;
+    ImageView playerPictureImageView;
+    Button firstButton;
+    Button secondButton;
     ProgressBar progressBar;
 
     private List<Player> players;
 
     private FirebaseFirestore database;
     private FirebaseAuth firebaseAuth;
+    private StorageReference storage;
     private FirebaseUser user;
     private Player player;
 
@@ -56,19 +63,16 @@ public class MainActivity extends AppCompatActivity {
 
         welcomeTextView = findViewById(R.id.welcomeTextView);
 
-        newMatchButton = findViewById(R.id.newMatchButton);
-        signUpButton = findViewById(R.id.signUpButton);
-        playerStatisticsButton = findViewById(R.id.playerStatisticsButton);
-        loginButton = findViewById(R.id.loginButton);
+        playerPictureImageView = findViewById(R.id.playerPictureImageView);
+        firstButton = findViewById(R.id.firstButton);
+        secondButton = findViewById(R.id.secondButton);
         progressBar = findViewById(R.id.progressBar);
 
         MatchSettingsData.matchSettingsViewModel = ViewModelProviders.of(this).get(MatchSettingsViewModel.class);
 
         database = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
-
-        // TODO: View player statistics option (Master - Detail fragments requirement assignment).
-        // TODO: Transition Portrait-Landscape.
+        storage = FirebaseStorage.getInstance().getReference("images");
     }
 
     @Override
@@ -77,18 +81,13 @@ public class MainActivity extends AppCompatActivity {
         checkUserState();
     }
 
-    public void startNewGame(View view) {
-//        Intent intent = new Intent(this, StartNewMatchActivity.class);
+/// Eventhandlers -------------------------------------------------------------------------------
+    public void startNewMatch(View view) {
         Intent intent = new Intent(this, MatchSettingsActivity.class);
         startActivity(intent);
     }
 
-    public void playerStatistics(View view) {
-        Intent intent = new Intent(this, PlayerStatisticsActivity.class);
-        startActivity(intent);
-    }
-
-    public void signUpUser(View view) {
+    public void registerUser(View view) {
         Intent intent = new Intent(this, CreateNewPlayerActivity.class);
         startActivity(intent);
     }
@@ -104,6 +103,11 @@ public class MainActivity extends AppCompatActivity {
         checkUserState();
     }
 
+    public void recordNewPictureForPlayer(View view) {
+
+    }
+
+/// Helper methods ------------------------------------------------------------------------------
     private void checkUserState() {
         progressBar.setVisibility(View.VISIBLE);
         user = firebaseAuth.getCurrentUser();
@@ -116,10 +120,11 @@ public class MainActivity extends AppCompatActivity {
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             player = queryDocumentSnapshots.toObjects(Player.class).get(0);
                             welcomeTextView.setText(getResources().getString(R.string.welcome) + ", " + player.getFirstname());
-                            progressBar.setVisibility(View.INVISIBLE);
                             setUI(true);
+                            loadPlayerPicture();
                         }
                     });
+
         } else {
             progressBar.setVisibility(View.INVISIBLE);
             setUI(false);
@@ -128,27 +133,51 @@ public class MainActivity extends AppCompatActivity {
 
     public void setUI(boolean loggedIn) {
         if (!loggedIn) {
-            loginButton.setText(R.string.log_in);
-            loginButton.setOnClickListener(new View.OnClickListener() {
+            firstButton.setText(R.string.log_in);
+            firstButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     loginUser(v);
                 }
             });
-            newMatchButton.setEnabled(false);
-            playerStatisticsButton.setEnabled(false);
-            signUpButton.setVisibility(View.VISIBLE);
+            secondButton.setText(getString(R.string.register));
+            secondButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) { registerUser(v); }
+            });
         } else {
-            loginButton.setText(R.string.log_out);
-            loginButton.setOnClickListener(new View.OnClickListener() {
+            playerPictureImageView.setImageDrawable(getDrawable(R.drawable.no_picture));
+            firstButton.setText(R.string.new_match);
+            firstButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    logOutUser(v);
+                    startNewMatch(v);
                 }
             });
-            newMatchButton.setEnabled(true);
-            playerStatisticsButton.setEnabled(true);
-            signUpButton.setVisibility(View.INVISIBLE);
+            secondButton.setText(R.string.log_out);
+            secondButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) { logOutUser(v); }
+            });
         }
+    }
+
+    private void loadPlayerPicture() {
+        StorageReference location = storage.child(user.getEmail() + ".png");
+        location.getBytes(1024 * 1024)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap playerPicture = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        playerPictureImageView.setImageBitmap(playerPicture);
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                });
     }
 }

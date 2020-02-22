@@ -105,7 +105,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity
         viewModel.setFavouriteBall(favouriteBall);
     }
 
-    // Eventhandlers
+    // Eventhandlers -------------------------------------------------------------------------------
     public void imageTapped(View view) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -123,6 +123,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity
         }
     }
 
+    // Helper methods ------------------------------------------------------------------------------
     private String validateInputFields() {
         StringBuilder sb = new StringBuilder();
 

@@ -8,9 +8,10 @@
     <string name="create_new_player">Create a new player</string>
     <string name="log_in">Log in</string>
     <string name="log_out">Log out</string>
-    <string name="sign_up">Sign up</string>
+    <string name="register">Register</string>
     <string name="ok" translatable="false">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="image_info">If logged in, tap image to take a new picture.</string>
 
     <!--    activity-start-new-game-->
     <string name="player_1">Player 1</string>
