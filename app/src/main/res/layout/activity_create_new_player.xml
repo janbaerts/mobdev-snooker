@@ -31,7 +31,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/favouriteBallImageView"
@@ -41,9 +41,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
                 android:contentDescription="@string/player_image"
                 android:onClick="imageTapped"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toStartOf="@+id/firstnameEditText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

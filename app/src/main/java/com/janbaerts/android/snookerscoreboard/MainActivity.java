@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.janbaerts.android.snookerscoreboard.data.AppConstants;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         MatchSettingsData.matchSettingsViewModel = ViewModelProviders.of(this).get(MatchSettingsViewModel.class);
+        MatchSettingsData.noPicture = getDrawable(R.drawable.no_picture);
 
         database = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -190,22 +192,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadPlayerPicture() {
         progressBar.setVisibility(View.VISIBLE);
-        StorageReference location = storage.child(user.getEmail() + ".png");
-        location.getBytes(1024 * 1024)
-                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-                        Bitmap playerPicture = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                        playerPictureImageView.setImageBitmap(playerPicture);
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressBar.setVisibility(View.INVISIBLE);
-                    }
-                });
+        try {
+            StorageReference location = storage.child(user.getEmail() + ".png");
+            location.getBytes(1024 * 1024)
+                    .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            Bitmap playerPicture = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            playerPictureImageView.setImageBitmap(playerPicture);
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+                    });
+        } catch (Exception e) {
+            Log.e("JB", e.getMessage());
+        }
     }
 
     private void savePictureToFirebase(byte[] image) {

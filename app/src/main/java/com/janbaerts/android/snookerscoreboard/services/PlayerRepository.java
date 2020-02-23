@@ -46,7 +46,7 @@ public class PlayerRepository implements PlayerRepositoryInterface {
                             allPlayers.add(qs.toObject(Player.class));
                         }
                     } else {
-                        Log.e("JAN", "Error getting players from Firebase.");
+                        Log.e("JB", "Error getting players from Firebase.");
                     }
                 }
             });

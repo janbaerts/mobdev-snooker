@@ -22,10 +22,6 @@ public class SelectPlayerActivity extends AppCompatActivity {
 
     public MatchSettingsViewModel matchSettingsViewModel;
     private FragmentManager fragmentManager;
-    private MatchSettingsActivity matchSettingsActivity;
-
-    private FrameLayout selectPlayerFragmentFrameLayout;
-    private FrameLayout playerDetailFragmentFrameLayout;
 
     private SelectPlayerFragment selectPlayerFragment;
     private PlayerDetailFragment playerDetailFragment;
@@ -44,10 +40,7 @@ public class SelectPlayerActivity extends AppCompatActivity {
         selectPlayerFragment = (SelectPlayerFragment)fragmentManager.findFragmentById(R.id.selectPlayerFragment);
         playerDetailFragment = (PlayerDetailFragment)fragmentManager.findFragmentById(R.id.playerDetailFragment);
 
-        selectPlayerFragmentFrameLayout = findViewById(R.id.selectPlayerFragmentFrameLayout);
-        playerDetailFragmentFrameLayout = findViewById(R.id.playerDetailFragmentFrameLayout);
         checkForDoublePaneLayout();
-
     }
 
     @Override
@@ -70,8 +63,13 @@ public class SelectPlayerActivity extends AppCompatActivity {
         SavePlayerInViewModel(view);
     }
 
+    public void selectPlayer(View view) {
+        finish();
+    }
+
     // Helper methods ------------------------------------------------------------------------------
     private void checkForDoublePaneLayout() {
+        playerDetailFragment = (PlayerDetailFragment)fragmentManager.findFragmentById(R.id.playerDetailFragment);
         if (playerDetailFragment == null)
             doublePaneLayout = false;
         else doublePaneLayout = true;
@@ -82,9 +80,14 @@ public class SelectPlayerActivity extends AppCompatActivity {
         String playerId = listItemText.substring(listItemText.lastIndexOf(' ') + 2, listItemText.lastIndexOf(')'));
         Log.d("JB", playerId);
         matchSettingsViewModel.setPlayer(getTappedPlayer(playerId), matchSettingsViewModel.getIndexOfPlayerBeingSelected());
+        matchSettingsViewModel.setSelectedPlayer(matchSettingsViewModel.getPlayers()[matchSettingsViewModel.getIndexOfPlayerBeingSelected()]);
         Log.i("JB", matchSettingsViewModel.getPlayers()[0].getFullName());
         this.setResult(RESULT_OK);
-        finish();
+
+        if (!doublePaneLayout)
+            finish();
+        else
+            showPlayerInPlayerDetailFragment();
     }
 
     private Player getTappedPlayer(String playerId) {
@@ -93,6 +96,10 @@ public class SelectPlayerActivity extends AppCompatActivity {
                 return matchSettingsViewModel.getQueryResult().get(i);
         }
         return null;
+    }
+
+    private void showPlayerInPlayerDetailFragment() {
+        playerDetailFragment.showPlayerStoredInViewModel();
     }
 
 }

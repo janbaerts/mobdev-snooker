@@ -67,4 +67,5 @@
     <string name="match_won">Proficiat %s, je hebt gewonnen!</string>
     <string name="image_info">Indien ingelogd, tik op afbeelding om een nieuwe foto te maken.</string>
     <string name="register">Registreer</string>
+    <string name="no_player_selected">Geen speler geselecteerd</string>
 </resources>
