@@ -51,6 +51,7 @@ public class MatchActivity extends AppCompatActivity {
 
     private boolean isRiggedForFoul;
     private boolean isNewMatch = true;
+    private boolean hasBeenPaused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

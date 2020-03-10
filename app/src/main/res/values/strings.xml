@@ -13,6 +13,7 @@
     <string name="cancel">Cancel</string>
     <string name="image_info">If logged in, tap image to take a new picture.</string>
     <string name="no_player_selected">No player selected</string>
+    <string name="remember_me">Remember me</string>
 
     <!--    activity-start-new-game-->
     <string name="player_1">Player 1</string>

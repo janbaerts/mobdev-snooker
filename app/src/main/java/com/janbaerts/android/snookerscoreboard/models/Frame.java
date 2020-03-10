@@ -1,5 +1,7 @@
 package com.janbaerts.android.snookerscoreboard.models;
 
+import androidx.annotation.NonNull;
+
 import com.janbaerts.android.snookerscoreboard.data.GameEventType;
 
 import java.util.ArrayList;
@@ -100,4 +102,10 @@ public class Frame {
     public int getTurn() { return turn; }
     public void nextTurn() { this.turn++; }
     public void revertTurn() { this.turn--; }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.format("Points scored in current frame = %d - %d%n", getScore()[0], getScore()[1]);
+    }
 }

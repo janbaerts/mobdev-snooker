@@ -2,6 +2,7 @@ package com.janbaerts.android.snookerscoreboard.viewmodels;
 
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
 import com.janbaerts.android.snookerscoreboard.models.Break;
@@ -175,4 +176,17 @@ public class MatchViewModel extends ViewModel {
 
     public int getPlayerInSeatIndex() { return (getTurn() + 1) % 2; }
 
+    @NonNull
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("MatchViewModel description:\n======================================\n");
+        sb.append(String.format("Player 1 = %s%n", getPlayers()[0].getFullName()));
+        sb.append(String.format("Player 2 = %s%n", getPlayers()[1].getFullName()));
+        sb.append(String.format("FrameScore = %s", getScore()));
+        sb.append(getCurrentFrame().toString());
+
+        return sb.toString();
+    }
 }
