@@ -59,8 +59,9 @@ public class SelectPlayerActivity extends AppCompatActivity {
     // Event handlers ------------------------------------------------------------------------------
     public void choosePlayer(View view) {
         Log.d("JB", "You tapped on a player in the RecyclerView.");
-        Log.d("JB", ((TextView)view).getText().toString());
-        SavePlayerInViewModel(view);
+        Log.d("JB", view.getClass().toString());
+        Log.d("JB", ((TextView)view.findViewById(R.id.userNameTextView)).getText().toString());
+        SavePlayerInViewModel(((TextView)view.findViewById(R.id.userNameTextView)).getText().toString());
     }
 
     public void selectPlayer(View view) {
@@ -75,9 +76,7 @@ public class SelectPlayerActivity extends AppCompatActivity {
         else doublePaneLayout = true;
     }
 
-    private void SavePlayerInViewModel(View view) {
-        String listItemText = ((TextView)view).getText().toString();
-        String playerId = listItemText.substring(listItemText.lastIndexOf(' ') + 2, listItemText.lastIndexOf(')'));
+    private void SavePlayerInViewModel(String playerId) {
         Log.d("JB", playerId);
         matchSettingsViewModel.setPlayer(getTappedPlayer(playerId), matchSettingsViewModel.getIndexOfPlayerBeingSelected());
         matchSettingsViewModel.setSelectedPlayer(matchSettingsViewModel.getPlayers()[matchSettingsViewModel.getIndexOfPlayerBeingSelected()]);

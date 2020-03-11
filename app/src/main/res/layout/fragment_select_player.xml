@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
 
         <EditText
             android:id="@+id/searchPlayerEditText"
@@ -22,7 +23,8 @@
             android:inputType="text"
             app:layout_constraintEnd_toStartOf="@+id/searchButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <Button
             android:id="@+id/searchButton"
@@ -35,11 +37,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/playerListRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_margin="16dp"
             android:visibility="visible"
-            android:id="@+id/playerListRecyclerView"
             app:layout_constraintTop_toBottomOf="@+id/searchPlayerEditText"
             tools:layout_editor_absoluteX="1dp" />
 
