@@ -66,8 +66,8 @@ public class MatchSettingsActivity extends AppCompatActivity {
         Player[] players = viewModel.getPlayers();
 
         // For testing:
-        players[0] = new Player("Jan", "Baerts", "jb@hotmail.com", FavouriteBall.BLUEBALL);
-        players[1] = new Player("Ethan", "Baerts", "eb@hotmail.com", FavouriteBall.BLACKBALL);
+//        players[0] = new Player("Jan", "Baerts", "jb@hotmail.com", FavouriteBall.BLUEBALL);
+//        players[1] = new Player("Ethan", "Baerts", "eb@hotmail.com", FavouriteBall.BLACKBALL);
         // To avoid manually having to choose players.
 
         if (players[0] != null && players[1] != null) {
@@ -76,7 +76,7 @@ public class MatchSettingsActivity extends AppCompatActivity {
             intent.putExtra("maxNumberOfFrames", viewModel.getMaxNumberOfFrames() + "");
             startActivity(intent);
         } else {
-            Toast.makeText(this, getResources().getString(R.string.must_choose_2_players), Toast.LENGTH_SHORT);
+            Toast.makeText(this, getResources().getString(R.string.must_choose_2_players), Toast.LENGTH_SHORT).show();
         }
     }
 
