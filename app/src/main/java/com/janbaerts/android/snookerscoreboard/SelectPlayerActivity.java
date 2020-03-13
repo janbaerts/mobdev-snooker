@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.bluetooth.BluetoothClass;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.common.util.DeviceProperties;
 import com.janbaerts.android.snookerscoreboard.data.MatchSettingsData;
 import com.janbaerts.android.snookerscoreboard.fragments.MatchSettingsFragment;
 import com.janbaerts.android.snookerscoreboard.fragments.PlayerDetailFragment;
@@ -71,7 +74,7 @@ public class SelectPlayerActivity extends AppCompatActivity {
     // Helper methods ------------------------------------------------------------------------------
     private void checkForDoublePaneLayout() {
         playerDetailFragment = (PlayerDetailFragment)fragmentManager.findFragmentById(R.id.playerDetailFragment);
-        if (playerDetailFragment == null)
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
             doublePaneLayout = false;
         else doublePaneLayout = true;
     }
