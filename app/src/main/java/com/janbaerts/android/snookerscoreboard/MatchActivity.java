@@ -50,8 +50,7 @@ public class MatchActivity extends AppCompatActivity {
     private MatchViewModel match;
 
     private boolean isRiggedForFoul;
-    private boolean isNewMatch = true;
-    private boolean hasBeenPaused = false;
+    private boolean isBusyLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +59,24 @@ public class MatchActivity extends AppCompatActivity {
 
         match = ViewModelProviders.of(this).get(MatchViewModel.class);
         progressBar = findViewById(R.id.progressBar);
+        assignAllViews(3);
 
-        initializeMatchViewModel();
+        if (match == null) {
+            Log.e("JB (in onCreate MatchActivity): ", "MatchViewModel not found.");
+        } else {
+            Log.d("JB", "MatchViewModel found.");
+        }
+
+        if (match.getHasToBeInitialized()) {
+            initializeMatchViewModel();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isBusyLoading)
+            updateUI();
     }
 
     @Override
@@ -186,9 +201,11 @@ public class MatchActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.addBall:
                 match.getCurrentFrame().addBall();
+                updateUI();
                 return true;
             case R.id.removeBall:
                 match.getCurrentFrame().removeBall();
+                updateUI();
                 return true;
             case R.id.endFrame:
                 Player frameLeader = match.getFrameLeader();
@@ -226,7 +243,7 @@ public class MatchActivity extends AppCompatActivity {
     }
 
     private void endMatch() {
-        Toast.makeText(this, "GAME OVER", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "GAME OVER", Toast.LENGTH_SHORT).show();
         this.finish();
     }
 
@@ -262,9 +279,9 @@ public class MatchActivity extends AppCompatActivity {
     }
 
     private void initializeMatchViewModel() {
-        if (isNewMatch)
+        isBusyLoading = true;
+        if (match.getHasToBeInitialized())
             match.initialize(Integer.parseInt(this.getIntent().getStringExtra("maxNumberOfFrames")));
-
 
         String firstPlayerId = this.getIntent().getStringExtra("firstPlayer");
         String secondPlayerId = this.getIntent().getStringExtra("secondPlayer");
@@ -288,7 +305,7 @@ public class MatchActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             if (task.isSuccessful()) {
                                                 players[1] = task.getResult().getDocuments().get(0).toObject(Player.class);
-                                                assignAllViews(3);
+//                                                assignAllViews(3);
                                                 match.setPlayers(players);
                                                 match.setCurrentBreak(new Break(players[match.getMatchStarter()]));
                                                 match.getCurrentFrame().pushBreak(match.getCurrentBreak());
@@ -298,12 +315,14 @@ public class MatchActivity extends AppCompatActivity {
                                             }
                                             progressBar.setVisibility(View.INVISIBLE);
                                             if (players[0] != null)
-                                                Toast.makeText(MatchActivity.this, "Players loaded.", Toast.LENGTH_SHORT).show();
-                                            // TODO: Make this a resource string.
+                                                Toast.makeText(MatchActivity.this,
+                                                        getResources().getString(R.string.players_loaded), Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                        } else
+                        } else {
                             loadingFailed(0);
+                        }
+                        isBusyLoading = false;
                     }
                 });
 
@@ -320,7 +339,6 @@ public class MatchActivity extends AppCompatActivity {
         eventList[0] = findViewById(R.id.gameEventListOne);
         eventList[1] = findViewById(R.id.gameEventListTwo);
         eventList[2] = findViewById(R.id.gameEventListThree);
-        fillEventList();
 
         framesScoredTextView = findViewById(R.id.framesScoredTextView);
 

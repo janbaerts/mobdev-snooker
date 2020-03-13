@@ -90,6 +90,7 @@
     <string name="cannot_end_frame">Sorry, scores are equal. You cannot end the frame.</string>
     <string name="confirm_end_of_frame">Are you sure you want to end the frame?</string>
     <string name="match_won">Congratulations %s, you\'ve won!</string>
+    <string name="players_loaded">Players loaded</string>
 
     <string name="end_frame">End frame</string>
     <string name="add_ball">Add ball</string>

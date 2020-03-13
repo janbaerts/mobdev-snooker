@@ -18,12 +18,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
@@ -82,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance().getReference("images");
+        getFirebaseInstanceId();
     }
 
     @Override
@@ -136,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /// Helper methods ------------------------------------------------------------------------------
+    /// Helper methods -----------------------------------------------------------------------------
     private void checkUserState() {
         progressBar.setVisibility(View.VISIBLE);
         user = firebaseAuth.getCurrentUser();
@@ -174,8 +180,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) { registerUser(v); }
             });
-        } else {
             playerPictureImageView.setImageDrawable(getDrawable(R.drawable.no_picture));
+        } else {
             firstButton.setText(R.string.new_match);
             firstButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -231,6 +237,20 @@ public class MainActivity extends AppCompatActivity {
                 loadPlayerPicture();
             }
         });
+    }
+
+    private void getFirebaseInstanceId() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (task.isSuccessful()) {
+                            String token = task.getResult().getToken();
+                            Log.i("JB Instance ID = ", token);
+                            System.out.println("Instance ID = " + token);
+                        }
+                    }
+                });
     }
 
 }

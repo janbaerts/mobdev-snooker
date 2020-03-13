@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +22,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 import com.janbaerts.android.snookerscoreboard.data.FavouriteBall;
 import com.janbaerts.android.snookerscoreboard.fragments.SelectPictureDialogFragment;
 import com.janbaerts.android.snookerscoreboard.models.Player;
@@ -43,6 +50,7 @@ public class CreateNewPlayerActivity extends AppCompatActivity
     CreateNewPlayerViewModel viewModel;
     FirebaseFirestore database;
     FirebaseAuth firebaseAuth;
+    FirebaseInAppMessaging firebaseMessaging;
 
     // LifecycleHooks
     @Override

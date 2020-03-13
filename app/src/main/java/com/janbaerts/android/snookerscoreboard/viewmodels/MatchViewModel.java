@@ -25,6 +25,8 @@ public class MatchViewModel extends ViewModel {
     private Player[] players;
     private Break currentBreak;
 
+    private boolean hasToBeInitialized = true;
+
 
     // Constructors
     public MatchViewModel() { }
@@ -38,8 +40,9 @@ public class MatchViewModel extends ViewModel {
         frames = new Frame[this.maxNumberOfFrames];
         frames[currentFrame] = new Frame(matchStarter);
         score = new int[2];
-        score[0] = 0;
-        score[1] = 0;
+//        score[0] = 0;
+//        score[1] = 0;
+        hasToBeInitialized = false;
 //        setCurrentBreak(new Break());
     }
 
@@ -176,17 +179,19 @@ public class MatchViewModel extends ViewModel {
 
     public int getPlayerInSeatIndex() { return (getTurn() + 1) % 2; }
 
-    @NonNull
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
+    public boolean getHasToBeInitialized() { return hasToBeInitialized; }
 
-        sb.append("MatchViewModel description:\n======================================\n");
-        sb.append(String.format("Player 1 = %s%n", getPlayers()[0].getFullName()));
-        sb.append(String.format("Player 2 = %s%n", getPlayers()[1].getFullName()));
-        sb.append(String.format("FrameScore = %s", getScore()));
-        sb.append(getCurrentFrame().toString());
-
-        return sb.toString();
-    }
+//    @NonNull
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//
+//        sb.append("MatchViewModel description:\n======================================\n");
+//        sb.append(String.format("Player 1 = %s%n", getPlayers()[0].getFullName()));
+//        sb.append(String.format("Player 2 = %s%n", getPlayers()[1].getFullName()));
+//        sb.append(String.format("FrameScore = %s", getScore()));
+//        sb.append(getCurrentFrame().toString());
+//
+//        return sb.toString();
+//    }
 }
