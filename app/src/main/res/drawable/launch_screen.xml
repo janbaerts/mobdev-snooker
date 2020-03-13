@@ -8,10 +8,12 @@
   
   <!-- Your product logo - 144dp color version of your app icon -->
   <item>
-    
+
     <bitmap
       android:src="@drawable/splash_screen"
-      android:gravity="fill"/>
+      android:antialias="true"
+      android:filter="true"
+      android:gravity="fill_horizontal|clip_vertical"/>
     
   </item>
   

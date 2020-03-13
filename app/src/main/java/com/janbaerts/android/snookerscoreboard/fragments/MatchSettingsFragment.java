@@ -36,8 +36,8 @@ public class MatchSettingsFragment extends Fragment {
     private Button startNewMatchButton;
     private FrameLayout searchPlayerFrameLayout;
 
-    public SelectPlayerFragment selectPlayerFragment;
-    public boolean isShowingSelectPlayerFragment;
+    private SelectPlayerFragment selectPlayerFragment;
+    private boolean isShowingSelectPlayerFragment;
     private MatchSettingsViewModel viewModel;
 
     public MatchSettingsFragment() {
@@ -55,7 +55,6 @@ public class MatchSettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_match_settings, container, false);
 
         firstPlayerTextView = view.findViewById(R.id.firstPlayerTextView);

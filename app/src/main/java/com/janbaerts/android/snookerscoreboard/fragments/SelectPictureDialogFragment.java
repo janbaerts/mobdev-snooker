@@ -16,7 +16,7 @@ import com.janbaerts.android.snookerscoreboard.data.FavouriteBall;
 
 public class SelectPictureDialogFragment extends DialogFragment {
 
-    SelectedPictureListener selectedPictureListener;
+    private SelectedPictureListener selectedPictureListener;
     FavouriteBall selectedPicture;
 
     public SelectPictureDialogFragment() {
@@ -24,7 +24,7 @@ public class SelectPictureDialogFragment extends DialogFragment {
     }
 
     public interface SelectedPictureListener {
-        public void onPictureTapped(int selectedColor);
+        void onPictureTapped(int selectedColor);
     }
 
     @Override
@@ -41,7 +41,6 @@ public class SelectPictureDialogFragment extends DialogFragment {
     // TODO: Nice to have: customized list using ListAdapter.
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose color...")
             .setItems(R.array.ball_colors, new DialogInterface.OnClickListener() {

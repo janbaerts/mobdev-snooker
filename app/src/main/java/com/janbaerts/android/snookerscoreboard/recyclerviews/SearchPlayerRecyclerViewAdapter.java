@@ -24,10 +24,10 @@ public class SearchPlayerRecyclerViewAdapter extends RecyclerView.Adapter {
     private List<Player> playerList;
 
     public static class SearchPlayerRecyclerViewViewHolder extends RecyclerView.ViewHolder {
-        public ImageView favouriteBallImageView;
-        public TextView playerNameTextView;
-        public TextView userNameTextView;
-        public SearchPlayerRecyclerViewViewHolder(@Nonnull ConstraintLayout constraintLayout) {
+        ImageView favouriteBallImageView;
+        TextView playerNameTextView;
+        TextView userNameTextView;
+        SearchPlayerRecyclerViewViewHolder(@Nonnull ConstraintLayout constraintLayout) {
             super(constraintLayout);
             favouriteBallImageView = constraintLayout.findViewById(R.id.favouriteBallImageView);
             playerNameTextView = constraintLayout.findViewById(R.id.playerNameTextView);
@@ -72,8 +72,4 @@ public class SearchPlayerRecyclerViewAdapter extends RecyclerView.Adapter {
         return null;
     }
 
-//    @Override
-//    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List payloads) {
-//        super.onBindViewHolder(holder, position, payloads);
-//    }
 }
